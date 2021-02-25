@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{__WAP_PATH}js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/yt.css"/>
+        <link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/tk.css"/>
+        <title>题库首页</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+	<div class="content-left">
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+		{include  file="tleft"}
+	</ul>
+<div class="fade-icon-shousuo"></div>				
+</div>
+<div class="content-right">
+<div class="shouye">
+	<div class="top-menu sp-bbottom">
+	<div >
+							
+	<div class="title">{$item["cname"]}
+	<a href="{:Url('tindex/sindex')}" class="tra">切换</a></div>
+
+	
+	<div class="jihuo-icon">{$isvip ? '已开通':'未激活'}</div>
+</div>
+
+							
+</div>
+<div >
+    <div class="sign-in" style="max-width:640px;font-size:20px;margin:0px auto;margin-top:40px">
+        <div class="header">
+            <div class="cont">
+                <div class="image">
+                    <img src="{$userInfo['avatar']}" class="img">
+                </div>
+                <div class="text" lick="myUser">
+                    <div class="name">{$userInfo['nickname']}</div>
+                    <div class="info">{$gold_name}: {$userInfo.gold_num }</div>
+                </div>
+                <a class="btn" href="javascript:alert('暂不开通')">明细</a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="head">
+                <div class="list">
+                    <div class="item">
+                        <div class="image">
+                            <img src="{__WAP_PATH}{$isSign ? 'images/stars2.png' : 'images/stars1.png'}" class="star">
+                        </div>
+                        
+                    </div>
+                </div>
+                <button class="btn" type="button" style="border: 0;padding:0 10px" click="show_sign_image">{$isSign ? '已签到' : '立即签到'}</button>
+   
+            </div>
+            <div class="foot">
+               <hr>
+                <div class="panel">
+                    <div class="name">已累计签到</div>
+                    <div class="count">
+                        <div class="cont">
+                            <div class="wrap">
+                                <div  class="item">{$signCount}</div>
+                            </div>
+                            <div class="unit">天</div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="record">
+                <b>签到规则：</b>
+                <div style="display:flex">
+                    <div style="text-align: center;margin:20px"><img src="{__WAP_PATH}images/u01.png"><br>兑换红包</div>
+                    <div style="text-align: center;margin:20px"><img src="{__WAP_PATH}images/u02.png"><br>兑换会员</div>
+                    <div style="text-align: center;margin:20px"><img src="{__WAP_PATH}images/u03.png"><br>兑换资源</div>
+            
+                </div>
+                <div>
+                    <div class="day">1、每日签到获得{$gold_coin}{$gold_name}</div>
+                    <p>2、运营人员会每月对签到前3名人员发放福利</p>
+                    <p>3、领取的现金可以在购买会员中抵现，但不可以提现</p>
+                    <p>4、如果中途间断，累计天数会重新计算，但是不影响金币兑换</p>
+                    <p>5、此签到内容会提供给讲师，讲师会根据签到用作考勤使用</p>
+                </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+    <shortcut></shortcut>
+</div>
+
+		<!--遮罩-->
+		{include  file="goumai"}
+<script>var _cur = 'home';//控制左侧选中菜单this</script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}js/tk.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

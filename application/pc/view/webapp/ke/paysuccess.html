@@ -1,0 +1,25 @@
+{extend name="ke/main"}
+{block name="content"}
+<script type="text/javascript" src="{__WAP_PATH}js/jquery-1.7.js"></script>
+<script type="text/javascript" src="{__WAP_PATH}js/jquery.qrcode.min.js"></script>
+    <div class="layui-breadcrumb breadcrumb">
+        <a href="/">首页</a>
+        <a><cite>支付订单</cite></a>
+    </div>
+    <div class="payment wrap">
+        <div class="header">
+
+        </div>
+        <div class="channel">
+
+             
+        </div>
+        <div class="footer">
+            <span class="tips">友情提示：这个课程您可以观看不需要购买</span>
+        </div>
+    </div>
+
+    <div id="alipay-qrcode" class="layui-hide"></div>
+    <div id="wxpay-qrcode" class="layui-hide"></div>
+
+{/block}

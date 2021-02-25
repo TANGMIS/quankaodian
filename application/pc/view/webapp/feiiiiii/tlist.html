@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="{MODULE_URL}template/webapp/layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tkExam.css"/>
+
+		<title>题库首页1</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}
+</ul>
+</div>
+<div class="content-right">
+	<div class="tiku" style="display: block;">
+		<div class="top-menu sp-bbottom">
+			<div class="title">{php echo $this->PoolData["cname"]}</div>
+			<div class="jihuo-icon">未激活</div>
+																	<div class="setting-fontSize">
+				<div class="setting-parent">
+					<i class="layui-icon layui-icon-set"></i>
+					<span class="setting-icon">字号设置</span>
+				</div>
+				<div class="fontSize-body">
+					<span class="up-sjx"></span>
+					<p>字体大小：</p>
+					<p>
+						<span class="smaller ">小</span>
+						<span class="small defaultColor">中</span>
+						<span class="big ">大</span>
+						<!-- <span class="bigger ">超大</span> -->
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="kszn layui-clear">
+			<div class="left-caidan">
+				<div class="kstk-caidan">选择章节</div>
+				<div class="kstk-left">
+					{loop $tcatelist $k $v}
+					<div class="caidan-list">
+						<div class="caidan-yiji">{$v["cateName"]}<span class="zhankai-arror"></span></div>
+						<ul>
+							<?php
+								$soncate=$tCate->GetCates($v["cateId"],$fix);
+							?>
+							{loop $soncate $sk $sv}
+							<li  data="{$sv['cateId']}">{$sv["cateName"]}</li>
+							{/loop}
+		
+						</ul>
+					</div>
+
+					{/loop}
+					
+				 
+				</div>
+			</div>
+			<div class="kstk-right">
+				<div class="kstk-xxjd">
+					学习进度
+					<span>已做题数&nbsp;&nbsp;正确题数</span>
+				</div><!-----cccc----->
+				<div class="kstk-mulu">
+					
+
+				</div>
+			</div>
+		</div>
+		<div class="kstk-dati">
+			<div class="ksdt-timu">
+			</div>
+		</div>
+	<p class="fade-icon-zhankai"></p>
+</div>
+
+			</div>
+		<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div>		</div>
+		<!--遮罩-->
+		{php include $this->template('goumai')}
+		<script>
+		var _cateid={php echo $this->cateid};
+		var _myFontSize = "22px";
+		var _qxh = "0";
+		var _cur = 'tiku';//控制左侧选中菜单this
+		var _zid={$zid};
+		_treeList="{php echo $this->createMobileUrl('zjlist',array('cateid'=>$this->cateid))}";
+		_tkExamInfo="{php echo $this->createMobileUrl('showque',array('cateid'=>$this->cateid))}";
+		_shouCang="{php echo $this->createMobileUrl('shouchang',array('cateid'=>$this->cateid))}";
+		_saveNote="{php echo $this->createMobileUrl('saveNote',array('cateid'=>$this->cateid))}";
+		</script>
+			
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/layui/layui.js" charset="UTF-8"></script>
+<script src="{MODULE_URL}template/webapp/js/tkExam.js"></script>
+
+	</body>
+</html>

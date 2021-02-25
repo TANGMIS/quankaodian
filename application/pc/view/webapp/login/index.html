@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	{include  file="public/head"}
+	<title>登录/注册</title>
+</head>
+<body>	
+	<div class="main">
+		<div class="main-top"></div>
+		<div class="main-middle">
+			<div class="layui-row">
+				<div class="layui-col-md6">
+					<img src="{__WAP_PATH}/images/login_bg.png">
+					
+				</div>
+				<div class="layui-col-md6" >
+					<div class="layui-tab layui-tab-brief account" lay-filter="docDemoTabBrief" style="padding-top:50px">
+								<!-- 登录切换按钮 -->
+						<ul class="layui-tab-title">
+						    <li class="layui-this">登录</li>
+						    <li>注册</li>
+						</ul>
+						<div class="layui-tab-content ">
+						    <div class="layui-tab-item layui-show">
+						    	<form class="layui-form-denglu">
+									<div class="layui-input-row layui-clear">
+										<label>手机号码</label>
+										<input id='account' name="account" type="text" class="" maxlength="11" placeholder="请输入手机号码">
+									</div>
+									<div class="layui-input-row layui-clear" id='password'>
+										<label>密码</label>
+										<input id="pwd" name="pwd" type="password" class="" placeholder="请输入密码">
+									</div>							
+								</form>	
+								<div class="tipcontent"><p id="phonetip">请输入正确的手机号码！</p><p id="register-tip">号码未注册请点击注册！</p></div>
+								<div class="layui-denglu-btn layui-clear">
+									<a href="#"><button class="layui-btn" id='login'>登录</button></a>
+								   
+								</div>
+								
+								<div class="bottom-tiaozhuan layui-clear">
+							
+									<div><a href="{:Url('repass')}">忘记密码?</a></div>
+								</div>
+						    </div>
+						    <div class="layui-tab-item">
+						    	<form class="layui-form-zhuce">
+									<div class="layui-input-row layui-clear">
+										<label>手机号码</label>
+										<input id='account-zhuce' name="account-zhuce" type="text" class="mui-input" maxlength="11" placeholder="请输入手机号码">
+									</div>
+									<div class="layui-input-row layui-clear" id="identify-zhuce">			
+									    <input id="validateButton-zhuce" type="button" value="获取验证码"  class="layui-btn"></input>
+									    <input id="identifyCode-zhuce" type="text" class="" placeholder="请输入验证码">
+								    </div>
+									<div class="layui-input-row layui-clear" id='password-zhuce'>
+										<label>设定密码</label>
+										<input id="pwd-zhuce" name="pwd-zhuce" type="password" class="" placeholder="请设定密码">
+									</div>							
+							    </form>	
+							    <div class="tipcontent"><p id="phonetip-zhuce">请输入正确的手机号码！</p><p id="register-tip-zhuce">号码已被注册,请点击登录！</p></div>
+								<div class="button-bottom">
+									<button id='login-zhuce' class="layui-btn layui-btn-fluid">立即注册</button>
+									<p><a href="{:Url('xieyi')}">注册即表示您同意<span>《使用协议》</span></a></p>
+								</div>
+						    </div>
+						</div>
+
+					</div>
+		
+		
+									<!-- 扫码登录 -->
+									<div class="scanCode layui-tab layui-tab-brief" style="display: none;padding-top:50px">
+										<ul class="layui-tab-title" style="text-align: center;">
+											<li  >扫码登录</li>
+									
+										</ul>
+										<div class="qrCode" id="login-qrcode">
+										</div>
+										<div class="scanTip">
+											<div class="list_scan">
+												<img src="{__WAP_PATH}/images/sCan.png">
+												<span>
+													打开微信
+												</span>
+												<span>扫一扫登录</span>
+											</div>
+										</div>
+									</div>
+									<div class="entrance">
+										<div class="bg_img"></div>
+										<div class="tips">
+											<span><img src="{__WAP_PATH}/images/safety_ico.png"><span>微信扫码登录</span></span>
+											<em></em>
+										</div>
+									</div>
+
+
+
+
+					</div> 
+	
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<style>
+ .entrance .bg_img {
+	width: 60px;
+	height: 60px;
+	background-image: url('{__WAP_PATH}/images/qrCode.png');
+	background-size: 120px 120px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	position: absolute;
+	top: 42px;
+	right: 58px;
+}
+
+.entrance .bg_img:hover {
+	background-position: -60px 0;
+	cursor: pointer;
+}
+
+.entrance .bg_img.pc {
+	background-position: 0 -60px;
+}
+.entrance .bg_img.pc:hover {
+	background-position: -60px -60px;
+}
+.entrance .tips {
+	font-size: 12px;
+	width: 115px;
+	position: absolute;
+	top: 48px;
+	right: 110px;
+	color: rgb(32, 165, 58);
+	background: #dff0d8;
+	padding: 5px 10px;
+	text-align: center;
+	border-radius: 4px;
+}
+.entrance .tips em {
+	position: absolute;
+	border: 6px solid #dff0d8;
+	border-color: transparent transparent transparent #dff0d8;
+	width: 0;
+	height: 0;
+	right: -11px;
+	top: 8px;
+	margin-left: -6px;
+}
+.entrance .tips img {
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+	margin-top: -1px;
+	margin-right: 4px;
+}
+.scanCode .scanTip .list_scan {
+	width: 150px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+.scanCode .qrCode {
+    text-align: center;
+
+}
+.scanCode .scanTip .list_scan > img {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 15px;
+}
+.main{min-width:1140px;}
+.main-top{width:1140px;margin:0 auto;margin-top:10px;margin-bottom:10px;height:85px;}
+
+.main-middle{width:100%;background:#009fa8;padding:20px 0;padding-bottom:40px;}
+.layui-row{width:1140px;margin:0 auto;}
+img.leftimg{width:100%;}
+.layui-tab{width:80%;margin:0 auto; background: #fff;-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius:5px;margin-top:40px;padding: 20px 0;}
+.layui-tab-title{border:none;width:200px;margin: 0 auto;}
+.layui-tab-title li{font-size:20px;}
+form.layui-form-denglu,form.layui-form-zhuce{border: 1px solid #C0C0C0;border-radius: 6px;margin: 20px 15px 5px 15px;padding-right:2px;}
+.layui-input-row{height: 55px;font-size: 17px;}
+form div:first-child{border-bottom:1px solid #C0C0C0;}
+.layui-input-row label{padding: 19px 15px;font-family: 'Helvetica Neue',Helvetica,sans-serif;line-height: 1.1;float: left;width: 30%;box-sizing: border-box;}
+input[type=text], input[type=password] {padding: 18px 15px 17px 0;float:left;width:70%;margin-bottom:0;padding-left:0;border:0;box-sizing: border-box;}
+#phonetip{display:none;color:red;font-size:14px;}
+#register-tip{display: none;color:red;font-size:14px;}
+.tipcontent{height:25px;padding-left:15px}
+.layui-denglu-btn{padding:0 20px;}
+.layui-denglu-btn a:first-child{float:left;}
+.layui-denglu-btn a:last-child{float:right;}
+.layui-denglu-btn a{width:49%;-moz-box-sizing:border-box;box-sizing: border-box;color:#fff;text-align: center;line-height:40px;}
+.layui-denglu-btn a button{width:100%;background:#009fa8;-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius:5px;}
+.bottom-tiaozhuan{padding:5px 15px;color:#007aff;font-size:16px}
+.bottom-tiaozhuan div:first-child{float:left}
+.bottom-tiaozhuan div:last-child{float:right}
+a{color:#007aff}
+#identifyCode-zhuce{padding-left:15px;}
+form.layui-form-zhuce div:nth-child(2){border-bottom:1px solid #C0C0C0;}
+#validateButton-zhuce{background:#ccc;margin-top:9px;-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius:5px;}
+#phonetip-zhuce{display:none;color:red;font-size:14px;padding-left:2px;}
+#register-tip-zhuce{display: none;color:red;font-size:14px;padding-left:2px;}
+.button-bottom{width:90%;margin:0 auto;}
+.button-bottom button{-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius:5px;background:#009fa8}
+.button-bottom p{text-align: center;margin-top:5px;}
+.button-bottom p a{color:#8f8f94}
+.button-bottom p a span{color:#007aff}
+.layui-layer{top:10px !important;}
+a:hover{color: #007aff;}
+	</style>
+	
+	<script type="text/javascript">
+		var _checkMobile = "{:Url('actionlogin',array('act'=>'checkMobile'))}";
+		var _userLogin = "{:Url('check',array('act'=>'login'))}";
+		var _checkuser_reg = "{:Url('user_reg',array('act'=>'reg'))}";
+		var _checklogin = "{:Url('actionlogin',array('act'=>'checklogin'))}";
+		var _index = "{:Url('tindex/start')}";//登录成功跳转
+		var _sendSms = "{:Url('public_api/code')}";
+		var _f = "Browser";
+		var countdown=60; 
+		</script>
+<script>
+	layui.use(['jquery','element','layer'], function(){ 
+		    var $ = layui.$ //重点处
+		    ,element = layui.element
+		    ,layer = layui.layer;
+		    		   
+	});
+	      
+	
+	        $('#login').click(function(){
+	            var _this = $(this);  
+	            userLogin(); 
+	        });
+	
+	        function userLogin(){ 	//用户登录 
+				var _url = _userLogin;
+				
+	            var _mobile = $('#account').val();
+	            var _pwd = $.trim($('#pwd').val()); 
+	            if(_pwd==''){
+	            	layer.msg('登录密码不能为空！',{
+	        		    time:1000
+	        	    });
+	                return false;
+	            }
+	            $.post(_url,{'account':_mobile,'pwd':_pwd},function(resp){
+					console.log(resp);
+	             	layer.msg(resp.msg,{
+	        		    time:1000
+	        	    });
+	                if(resp.code==200){ 
+	                    window.location.href=_index;
+	                }
+	            },'json');
+	        }
+	 
+	$(function () {
+		jQuery('#login-qrcode').qrcode({width: 200, height: 200, text: "{$mobile_url}"});
+		
+		var login_status_int = '';
+		$('.bg_img').click(function (event) {
+			if ($(this).hasClass('pc')) {
+				$(this).removeClass('pc');
+				$('.scanCode').hide().prev().show();
+				window.clearInterval(login_status_int);
+				$('.tips>span>span').html('微信扫码登录');
+			} else {
+				$(this).addClass('pc');
+				$('.account').hide().next().show();
+				$('.tips>span>span').html('点击账号登录')
+				login_status_int = window.setInterval(checkLogin, 3000);
+			}
+		});
+	
+		function checkLogin(){
+			$.ajax({
+				type: "post",
+				url: _checklogin,
+				dataType: "json",
+				data: {
+					login_token: "{$login_token}",
+				},
+				success:function(res){
+					console.log(res);
+					if(res.msg == "ok"){
+						window.location.href = _index;
+						window.clearInterval(login_status_int);
+					}
+				}, 
+				error:function(res){
+					console.log(res);
+				},   
+			});
+		};
+
+			$('#login-zhuce').click(function(){
+	            var _this = $(this); 
+	            userReg(); 
+	        });
+	
+	        function userReg(){
+
+	            var _mobile = $('#account-zhuce').val();
+	            var _yzm = $('#identifyCode-zhuce').val();
+				var _pwd = $('#pwd-zhuce').val();
+	            if(_pwd==''){
+	            	layer.msg('请设置密码！',{
+	        		    time:1000
+	        	    });
+	                return false;
+	            }
+	            $('#login-zhuce').attr('disabled',true);
+	            $.post(_checkuser_reg,{'phone':_mobile,'code':_yzm,'pwd':_pwd},function(resp){
+					console.log(resp);
+	            	layer.msg(resp.msg,{
+	        		    time:1000
+	        	    });
+	                if(resp.code=="200"){
+	                    window.location.href = _index;
+	                }else{
+	                     $('#login-zhuce').attr('disabled',false);
+	                }
+	            },'json');
+			};
+			
+			
+			$("#validateButton-zhuce").click(function(){		
+		
+				var obj = $("#validateButton-zhuce");
+		
+				var _tel = $("#account-zhuce").val();
+				console.log(_tel)
+
+				settime(obj);
+		        $.post(_sendSms,{'phone':_tel},function(resp){
+					console.log(resp);
+		        	layer.msg(resp.msg,{
+	        		    time:1000
+	        	    });
+		            if(resp.status==1){
+		                countdown=0;
+		            }
+		        },'json');
+			})
+
+			function settime(obj) { //发送验证码倒计时
+			    if (countdown == 0) { 
+			        obj.attr('disabled',false); 
+			        //obj.removeattr("disabled"); 
+			        obj.val("获取验证码");
+			        countdown = 60; 
+			        return;
+			    } else { 
+			        obj.attr('disabled',true);
+			        obj.val("重新发送(" + countdown + ")");
+			        countdown--; 
+			    } 
+			    setTimeout(function() { 
+			    	settime(obj)},1000) 
+			}
+			
+	})
+	</script>
+</body>
+</html>

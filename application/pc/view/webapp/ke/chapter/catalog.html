@@ -1,0 +1,18 @@
+<div class="layui-card sidebar-card sidebar-chapter">
+    <div class="layui-card-header">课程目录(已播放：{$taskInfo.play_count })</div> 
+    <div class="layui-card-body">
+        <div class="sidebar-chapter-list">
+                {volist name="chapters.data" id="chapter" }
+                <div class="chapter-title layui-elip">{$chapter.title}</div>
+                <ul class="sidebar-lesson-list">
+                        {volist name="chapter.children" id="lesson"}
+                        <li class="lesson-title layui-elip">
+                                <a  href="{:Url('chapter',array('id'=>$lesson.id,'special_id'=>$special_id))}">{$lesson.title}</a>
+                                <!--span class="deny">{$lesson.title}</span-->
+                        </li>
+                        {/volist}
+                </ul>
+                {/volist}
+        </div>
+    </div>
+</div> 

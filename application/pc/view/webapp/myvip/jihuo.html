@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{__WAP_PATH}js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="{__WAP_PATH}layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/tkExam.css"/>
+		<title>题库</title>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+<div class="content-left">
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+{include  file="tleft"}
+</ul>
+</div>
+<div class="content-right">
+	<div class="tiku" style="display: block;">
+		<div class="top-menu sp-bbottom">
+			<div class="title">{$item.cname}</div>
+		
+		
+		</div>
+		<div class="kszn layui-clear ">
+			<div class="main">
+		{if $isopenc}
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>您已经是会员了</legend>
+			<div class="layui-field-box">
+				<div class="user">
+					<div class="layui-form-item" style="margin-bottom: 0;">
+						 您好{if $userinfo["level"]>0 && $userinfo["is_permanent"]>0}永久{/if}会员!
+					</div>
+					
+	
+			</div> 
+		</fieldset>
+		{else}
+				<fieldset class="layui-elem-field layui-field-title">
+					<legend>激活会员</legend>
+					<div class="layui-field-box">
+					   <form id='login-form' class="layui-form">
+						<div class="layui-form-item" style="margin-bottom: 0;">
+							<label class="layui-form-label">当前账户</label>
+							<div class="layui-input-block" style="line-height: 35px;">
+								{$userinfo["phone"]}{if $userinfo["phone"]==''}{$userinfo["nickname"]}{/if}
+							</div>
+						</div>	
+							<div class="layui-form-item">
+								<label class="layui-form-label">激活码</label>
+								<div class="layui-input-block">
+									<input id='member_code' type="text" class="layui-input" maxlength="24" placeholder="请输入激活码">
+								</div>
+							</div>		
+							<div class="layui-form-item">
+								<label class="layui-form-label">密码</label>
+								<div class="layui-input-block">
+									<input id='member_pwd' type="text" class="layui-input" maxlength="24" placeholder="请输入密码">
+								</div>
+							</div>					
+						</form>
+						<div class="layui-clear">
+							<button id='jihuo' class="layui-btn layui-btn-fluid">激活</button>
+						</div>
+					</div> 
+				</fieldset>
+			
+			{/if}
+		</div>   
+		</div>
+		<div class="kstk-dati">
+			<div class="ksdt-timu">
+			</div>
+		</div>
+	<p class="fade-icon-zhankai"></p>
+</div>
+
+</div>
+</div>
+<style>
+
+	.main{width:70%;margin:0 auto;font-size:16px;}
+	.layui-elem-field div.layui-field-box{background:#fafafa;padding:80px 345px;border:1px solid #D9D9D9;}
+	.layui-elem-field legend{padding:30px 10px;color:#009688;font-size:25px;}
+	.tipcontent{height:30px;padding-left:110px;}
+	.tipcontent p{display:none;color:red;font-size:14px;}
+	.layui-form-mid{margin-right:0;padding: 0px !important;}
+	.zidingyi-btn{width:136px;text-align: center;}
+	.btn-bg{background: #009fa8;}
+	.layui-btn-fluid{width:75%;margin-top:30px;float:right;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background:#009fa8}
+	form div:first-child{margin-bottom:30px;}
+	.layui-layer{top:10px !important;}
+	
+	/*validatemobile.php 用到的基本样式在上面*/
+	form div.validate-form-item:first-child{margin-bottom:15px;}/*重新定义*/
+	.sethidden{display: none;}
+	
+	
+	.xieyi{padding:0 60px;}
+	
+	.layui-colla-title{font-size:17px;}
+	.border-none{border:0;}
+	.layui-colla-item p{cursor:pointer;}
+	.return-pre{color:#009fa8;margin-top:30px;font-size:22px;font-weight:500;cursor: pointer;}
+	.return-pre i{font-size:25px;padding-right:10px;}
+	.select-overflow{margin-top: 10px;}
+	.layui-elem-field legend{padding:15px 10px;}
+	
+		</style>
+		<!--遮罩-->
+		{include  file="goumai"}
+		<script>
+		var _cur = 'jihuo';//控制左侧选中菜单this
+		var cateid='{$id}';
+		_user_login="{:Url('index/user_login')}";
+		_confirm_activation="{:Url('auth_api/confirm_activation')}";
+		</script>
+<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script> 
+		layui.use(['jquery','element','layer'], function(){ 
+		    var $ = layui.$ //重点处
+		    ,element = layui.element
+		    ,layer = layui.layer;
+		    $('#jihuo').click(function(){
+    	$.post(_user_login,{},function(resp){
+			var member_code=$("#member_code").val();
+			var member_pwd=$("#member_pwd").val();
+			if(member_code=='') return alert('请输入卡号');
+			if(member_pwd=='') return alert('请输入密码');
+			$.post(_confirm_activation,{'member_code':member_code,'member_pwd':member_pwd,'cateid':cateid},function(resp){
+				console.log(resp);
+				layer.msg(resp.msg,{
+	        		    time:1000
+	        	    });
+				if(resp.code==200){
+					location.reload();
+				}
+				//
+			},"json");
+		});
+	});		   
+	});
+
+</script>
+	</body>
+</html>

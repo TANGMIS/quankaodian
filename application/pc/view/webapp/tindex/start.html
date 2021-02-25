@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>题库首页</title>
+		<style>
+			.list_ul {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 0.6rem;
+        margin-left: 0.3rem;
+    }
+
+        .list_ul .list_li {
+            display: block;
+            width: 17.4rem;
+            height: 10.8rem;
+            margin-right: 0.3rem;
+            border-radius: 0.2rem;
+            background: #FFFFFF;
+            margin-top: 0.3rem;
+            box-shadow: -0.05rem 0.05rem 0.15rem -0.04rem rgba(1,23,44,0.04),0.05rem 0.05rem 0.15rem -0.04rem rgba(1,23,44,0.04);
+            text-decoration: none;
+        }
+
+            .list_ul .list_li .listIcon {
+                width: 3.9rem;
+                height: 3.9rem;
+                display: block;
+                margin: 0 auto;
+                margin-top: 0.6rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .list_ul .list_li .txt {
+                text-align: center;
+                font-size: 1.32rem;
+                color: #333333;
+                font-size: PingFang-SC-Medium;
+                font-weight: 500;
+            }
+			.tra{background: #009fa8; border-radius: 25px;height:30px; line-height: 30px;text-align: center;margin: 20px;padding: 0px 20px;color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+	<div class="content-left">
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+		{include  file="tleft"}
+	</ul>
+<div class="fade-icon-shousuo"></div>				
+</div>
+<div class="content-right">
+<div class="shouye">
+	<div class="top-menu sp-bbottom">
+	<div >
+							
+	<div class="title">{$item["cname"]}
+	<a href="{:Url('tindex/index')}" class="tra">切换</a></div>
+
+	
+	<div class="jihuo-icon">{$isopenc ? '已开通':'未激活'}</div>
+</div>
+
+							
+</div>
+<div class="tkxx">
+							<div class="tkxx-right">
+								<div class="tkxx-top-menu">用户服务专区</div>
+								<p class="phone-xiazai"><a href="#">微信小程序手机应用</a></p>
+								<p class="more-chanpin"><a href="#">更多辅导产品</a></p>
+								<p class="get-libao" style="color: red;">领取活动礼包</p>
+								</div>
+							<div class="tkxx-left">
+								<div class="tkxx-top-menu">学习报告</div>
+								<div class="tkxx-ztqk">
+									<p>总题量：<span>{$tquetotal}</span></p>
+									<p>笔记：<span>{$bijitotal}</span></p>
+									<p>错误：<span>{$cuotitotal}</span></p>
+									<p>收藏题：<span>{$shoucangtotal}</span></p>
+								</div>
+								<div class="tkxx-xxjd">
+									<span class="xxjd-title">题库学习进度：</span>
+									<div class="layui-progress-parent">
+										<div class="layui-progress layui-progress-big" lay-showPercent="yes">
+									        <div class="layui-progress-bar myzdy-bg1" lay-percent="0%"></div>
+									    </div>
+									</div>
+								</div>
+								<div class="tkxx-zql">
+									<span class="zql-title">已做题正确率：</span>
+									<div class="layui-progress-parent">
+										<div class="layui-progress layui-progress-big" lay-showPercent="yes">
+									        <div class="layui-progress-bar myzdy-bg1" lay-percent="0%"></div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-row">
+							<div class="layui-inline list_ul" style="width: 68%;margin:0px auto">
+								
+								{volist name="tm" id="vo"}
+								<a class="list_li" href="{$vo.curl}">
+									<img class="listIcon" src=" {$vo.cimg}" alt="" />
+									<div class="txt"> {$vo.ctitle}</div>
+								</a>
+								{/volist}
+					
+							</div>
+
+						</div>
+					</div>
+					<p class="fade-icon-zhankai"></p>
+				</div>
+			</div>
+		</div>
+		<!--遮罩-->
+		{include  file="goumai"}
+<script>var _cur = 'home';//控制左侧选中菜单this</script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}js/tk.js"></script>
+
+	</body>
+</html>

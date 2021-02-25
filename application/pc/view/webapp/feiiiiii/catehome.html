@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="{MODULE_URL}template/webapp/layui/css/layui.css" media="all">
+	<title>科目选择</title>  
+	<style>
+		/*forget.php*/
+.main{min-width:1140px;width:1140px;margin:0 auto;font-size:16px;}
+.layui-elem-field div.layui-field-box{background:#fafafa;padding:80px 345px;border:1px solid #D9D9D9;}
+.layui-elem-field legend{padding:30px 10px;color:#009688;font-size:25px;}
+.tipcontent{height:30px;padding-left:110px;}
+.tipcontent p{display:none;color:red;font-size:14px;}
+.layui-form-mid{margin-right:0;padding: 0px !important;}
+.zidingyi-btn{width:136px;text-align: center;}
+.btn-bg{background: #009fa8;}
+.layui-btn-fluid{width:75%;margin-top:30px;float:right;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background:#009fa8}
+form div:first-child{margin-bottom:30px;}
+.layui-layer{top:10px !important;}
+
+/*validatemobile.php 用到的基本样式在上面*/
+form div.validate-form-item:first-child{margin-bottom:15px;}/*重新定义*/
+.sethidden{display: none;}
+
+/*agreement.php 用到的样式*/
+.xieyi{padding:0 60px;}
+
+/*selectkeMu.php*/
+.layui-colla-title{font-size:17px;}
+.border-none{border:0;}
+.layui-colla-item p{cursor:pointer;}
+.return-pre{color:#009fa8;margin-top:30px;font-size:22px;font-weight:500;cursor: pointer;}
+.return-pre i{font-size:25px;padding-right:10px;}
+.select-overflow{margin-top: 10px;}
+.layui-elem-field legend{padding:15px 10px;}
+	.layui-collapse{ padding:10px;}
+	.layui-collapse p{ padding-bottom:10px;}
+	.depth2{ padding-left:5px;}
+	.depth3{ padding-left:15px;}
+	.depth4{ padding-left:30px;}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="return-pre" onclick="javascript:history.go(-1);"><i class="layui-icon layui-icon-return"></i>返回</div>
+		<fieldset class="layui-elem-field layui-field-title">
+            <legend>科目选择</legend>
+        </fieldset>
+        <!-- 搜索-->
+        <div class="layui-inline">
+		      <div class="layui-input-inline">
+		        <input type="text" id="keywork" placeholder="请输入关键词" autocomplete="off" class="layui-input">
+		      </div>
+		      <button class="layui-btn layui-btn-radius" id="seachBtn">搜索</button>
+		</div>
+		<div class="layui-collapse select-overflow" lay-accordion="" style="overflow-y: scroll;">
+			<div class="layui-colla-item" style="display: none;">
+				<h2 class="layui-colla-title">搜索结果</h2>
+				<div class="layui-colla-content layui-show" id="seachHtml">
+				</div>
+			</div>
+            <?php
+            $i=0;
+            foreach ($catelist as $k => $v) {           	
+                if($v["depth"]==1&&$i==0){
+                    echo "<div class='layui-colla-item'>\n";
+                }elseif($v["depth"]==1){
+                    echo "</div></div></div>\n<div class='layui-colla-item'>\n";
+                }                            
+                if($v["depth"]==1){
+                    echo "<h2 class='layui-colla-title'>".$v["cname"]."</h2>\n";
+                    echo "<div class='layui-colla-content'>\n";
+                    echo "	<div class='layui-collapse' lay-accordion=''>\n";
+                    $i=1;
+                }else{                    
+                    echo "<p";
+                    echo " class='depth".$v["depth"]."'";                   
+                    echo ">";
+                    if($v["depth"]>2){
+                    	echo "》";
+                    }
+                    echo "<a href='javascript:void(0);' class='setKeMu' data-k='M_全国_全科医学' data-d='M' data-x='[QK_Z]' data-n='".$v['cname']."'>".$v["cname"]."</a></p>\n";
+                }
+            }
+            echo "</div></div></div>\n";
+            ?>
+            
+		</div>
+	</div>   	
+
+<script>
+	var _l1 = '';
+	var _l2 = '';
+	layui.use(['jquery','element','layer'], function(data){ 
+		var $ = layui.$ //重点处
+		,element = layui.element
+		,layer = layui.layer;
+		 //监听折叠
+        element.on('collapse(test)', function(data){
+        	
+        //layer.msg('展开状态：'+ data.show);
+        });
+        
+        //控制滚动条
+        var selectheight = $(window).height() - 190;
+        $('.select-overflow').height(parseInt(selectheight));
+        
+        $(document).on('click','.setKeMu',function(){
+        	var _this = $(this);
+        	var _keMu = _this.attr('data-k');
+        	var _sysTypeGoods = _this.attr('data-d');
+        	var _sysTypeISN = _this.attr('data-x');
+        	var _keMuName = _this.attr('data-n');
+        	var _url = "{php echo $this->createMobileUrl('thome')}"; 
+        	window.location.href = _url+"&keMu="+_keMu+"&sysTypeGoods="+_sysTypeGoods+"&sysTypeISN="+_sysTypeISN+"&keMuName="+_keMuName;
+        }); 
+
+        $('.setKeMu1').click(function(){
+        	var _this = $(this);
+        	var _keMu = _this.attr('data-k'); 
+        	var _url = "./index1.php?m=Product&a=updateCurKeMu&agentId=0&g=zhukao&f=Browser"; 
+        	$.post(_url,{'keMu':_keMu},function(resp){
+        		window.location.href = "./index1.php?m=Product&a=index&agentId=0&g=zhukao&f=Browser";
+        	},'json');
+        	
+        });
+        $('#seachBtn').click(function(){
+        	var _keyword = $("#keywork").val();
+        	if(_keyword==''){
+        		layer.msg('搜索内容不能为空！',{
+	        		    time:1000
+	        	    });
+	                return false;
+        	}
+        	//遍历三级
+        	var _html = '';
+        	$("#seachHtml").html("");
+        	$(".setKeMu").each(function(i){ 
+        		var _text = $(this).text();
+        		if(_text.indexOf(_keyword) >= 0 ) { 
+				     _html = _html + '<p>'+$(this).parent().html()+'</p>';
+				} 
+			}); 
+			if(_html==''){_html = '<p>未搜索到相关内容</p>';}
+			$("#seachHtml").html(_html);
+			$("#seachHtml").parent().show();
+        });
+        
+         $(document).keydown(function(e) {
+    		if (e.keyCode == 13) {
+      			$('#seachBtn').click();
+    		}
+  		});
+
+        if(_l1!=''){
+        	$('#fst'+_l1).trigger('click');
+        }
+        if(_l2!=''){
+        	$('#sec'+_l2).trigger('click');
+        }
+	})
+</script> 
+</body>
+</html>

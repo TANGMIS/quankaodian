@@ -1,0 +1,98 @@
+
+{extend name="ke/main"}
+{block name="content"}
+    <div class="index-carousel wrap">
+        <div class="layui-carousel" id="carousel">
+            <div class="carousel" carousel-item>
+                    <div class="item">
+                        <a href="#">
+                            <img class="carousel" src="{__WAP_PATH}/images/fatt.png">
+                        </a>
+                    </div>
+
+                    <div class="item">
+                        <a href="#">
+                            <img class="carousel" src="{__WAP_PATH}/images/ccsa.png">
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="course-sort wrap">
+        <a class="layui-btn layui-btn-xs" href="{:Url('ke/list',array('sort'=>'score'))}">综合</a>
+        <a class="none" href="{:Url('ke/list',array('sort'=>'rating'))}">好评</a>
+        <a class="none" href="{:Url('ke/list',array('sort'=>'latest'))}">最新</a>
+        <a class="none" href="{:Url('ke/list',array('sort'=>'popular'))}">最热</a>
+        <a class="none" href="{:Url('ke/list',array('sort'=>'featured'))}">推荐</a>
+        <a class="none" href="{:Url('ke/list',array('sort'=>'free'))}">免费</a>
+</div>
+<div class="course-list clearfix">
+    <div class="layui-row layui-col-space20 flow-default"  id="LAY">
+
+         
+    </div>
+</div>
+<script>
+    var getSpecial="{:Url('ke/getSpecial',array('sort'=>$sort,'type'=>$type))}";
+</script>
+<script>
+    layui.use(['flow','jquery'], function(){
+    var $ = layui.$; //重点处
+
+      var flow = layui.flow;
+      flow.load({
+        elem: '#LAY'
+        ,scrollElem: '#LAY'
+        ,done: function(page, next){
+        var lis = [];
+        $.get(getSpecial+'&page='+page,function(res){
+            console.log(res);
+            var data=res.data.data;
+            layui.each(data, function (index, item) {
+                var typetext='';
+                switch(item.type){
+                    case 1:
+                        typetext="图文";
+                        break;
+                    case 2:
+                        typetext="音频";
+                        break;
+                    case 3:
+                        typetext="视频";
+                        break;
+                    case 4:
+                        typetext="直播";
+                        break;
+                    case 5:
+                        typetext="专栏";
+                        break;
+
+                }
+            var html='<div class="layui-col-md3">';
+                html=html+'<div class="course-card">';
+                html=html+'<div class="cover">';
+                html=html+'<a href="/pc/ke/course/special_id/'+item.id+'.html">';
+                html=html+'<img src="'+item.image+'" >';
+                html=html+'</a>';
+                html=html+'</div>';
+                html=html+'<div class="info " >';
+                html=html+'<div class="title layui-elip"><a href="/pc/ke/course/special_id/'+item.id+'.html" >'+item.title+'<span style="color:red">['+typetext+']</span></a></div>';
+                html=html+'<div class="meta">';
+                html=html+'<span class="price">会员￥'+item.member_money+'</span>';
+                html=html+' <span class="user">'+item.browse_count+'人购买</span>';
+                html=html+'</div>';
+                html=html+'</div>';
+                html=html+'</div>';                
+                html=html+'</div>';
+
+                lis.push(html);
+            });
+            next(lis.join(''), page < res.data.totalpage); 
+        },'json')}
+      });
+    });
+  </script>   
+    <style>
+        .layui-flow-more{clear: both;}
+    </style>
+    {/block}

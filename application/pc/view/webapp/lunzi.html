@@ -1,0 +1,67 @@
+<div class="swiper_wrap">
+	<ul class="font_inner">
+	<li><a href="###">17：50 被情**通过激活卡激活了会员</a></li>
+	<li><a href="###">13：50 被情**通过在线支付激活了会员</a></li>
+    <li><a href="###">14：50 被情**通过激活卡激活了会员</a></li>
+	<li><a href="###">15：50 被情**通过在线支付激活了会员</a></li>
+	</ul>
+</div>
+<style>
+     .swiper_wrap{
+            display: inline-block;
+            height: 30px;
+			overflow: hidden;
+		}
+		.swiper_wrap ul{
+            position: relative;
+		}
+		.swiper_wrap ul li{
+			line-height: 30px;
+	
+        }
+        .swiper_wrap ul li a{color:red}
+        
+</style>
+<script type="text/javascript">
+	$(function(){
+	
+	$(".font_inner li:eq(0)").clone(true).appendTo($(".font_inner"));
+	var liHeight = $(".swiper_wrap").height();
+	var totalHeight = ($(".font_inner li").length *  $(".font_inner li").eq(0).height()) -liHeight;
+	$(".font_inner").height(totalHeight);
+	var index = 0;
+	var autoTimer = 0;
+	var clickEndFlag = true;
+
+	function tab(){
+		$(".font_inner").stop().animate({
+			top: -index * liHeight
+		},400,function(){
+			clickEndFlag = true;//图片走完才会true
+			if(index == $(".font_inner li").length -1) {
+				$(".font_inner").css({top:0});
+				index = 0;
+			}
+		})
+	}
+	function next() {
+		index++;
+		if(index > $(".font_inner li").length - 1) {//判断index为最后一个Li时index为0
+			index = 0;
+		}
+		tab();
+	}
+
+
+	//自动轮播
+	autoTimer = setInterval(next,3000);
+	$(".font_inner a").hover(function(){
+		clearInterval(autoTimer);
+	},function() {
+		autoTimer = setInterval(next,3000);
+	})
+
+
+
+	})
+	</script>

@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tk.css"/>
+		<title>题库首页</title>
+		<style>
+			.stcz-bg{background:#EAF4EB;padding:10px 8px;width:100%;-moz-box-sizing:border-box;box-sizing: border-box;padding-right:80px;position:relative;}
+.stcz-input{border:none;width:100%;-moz-box-sizing:border-box;box-sizing: border-box;height:30px;}
+.stcz-bg .search-icon{margin-top:5px;display:inline-block;width:22px;height:22px;background:url("../images/icons.png") 0 -342px no-repeat;}
+.stcz-icon-parent{position:absolute;right:8px;top:9px;padding:0px 25px;background:#009fa8;cursor:pointer;}
+.stcz-bg i{display:none;position:absolute;right:90px;color:red;top:18px;font-weight: 700;cursor:pointer;}
+.stcz-tips{color:#009fa8;font-size:16px;padding:10px 5px;}
+.stcz-detial-top{background:#F0F0F0;text-align: center;padding:5px;}
+.stcz-detial-top i{font-size:26px;}
+.stcz-detial-top span{font-size:15px;padding-left:10px;}
+.stcz-detial-main{padding-right:5px;margin-top:5px;/*height:377px;*/overflow-y: auto;}
+.stcz-detial-main .stcz-timu-title .color-red{color:red;}
+.stcz-detial-main .stcz-timu-title{padding:5px 0;border-bottom:1px solid #ccc;-moz-box-sizing:border-box;box-sizing:border-box;}
+.stcz-detial-main .stcz-timu-title:hover{background:#F0F0F0;cursor:default}
+.stcz-detial-main .stcz-timu-title p{-moz-box-sizing:border-box;box-sizing:border-box;display: inline-block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.stcz-detial-main .stcz-timu-title p:first-child{width:20%;}
+.stcz-detial-main .stcz-timu-title p:last-child{width:78%;}
+.stcz-timu{display: none;}
+.yxj-icon{border-bottom:none;}
+.st{height:532px;overflow-y: auto;}
+.stcz-timu-return{display:none;position:absolute;top:5px;left:0px;cursor:pointer;border:1px solid #009fa8;color:#009fa8;padding:3px 10px;font-size:16px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+.stcz-timu-return:hover{background:#009fa8;color:#fff;}
+		</style>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+	<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}
+</ul>
+<div class="fade-icon-shousuo"></div>				</div>
+				<div class="content-right">
+					<div class="chazhao">
+						<div class="top-menu sp-bbottom">
+							<div class="stcz-timu-return">返回</div>
+							<div class="title"></div>
+							<div class="jihuo-icon">未激活</div>
+																					<div class="setting-fontSize">
+						    	<div class="setting-parent">
+						    		<i class="layui-icon layui-icon-set"></i>
+						    	    <span class="setting-icon">字号设置</span>
+						    	</div>
+						    	<div class="fontSize-body">
+						    		<span class="up-sjx"></span>
+						    		<p>字体大小：</p>
+						    		<p>
+						    			<span class="smaller ">小</span>
+						    			<span class="small defaultColor">中</span>
+						    			<span class="big ">大</span>
+						    			<!-- <span class="bigger ">超大</span> -->
+						    		</p>
+						    	</div>
+						    </div>	
+						</div>
+						<div class="stcz layui-clear">
+							<div class="stcz-bg">
+								<input class="stcz-input" placeholder="输入您要查找的试题关键字" type="text">
+								<i class="layui-icon layui-icon-close" style="display: inline;"></i> 
+								<div class="stcz-icon-parent">
+									<span class="search-icon"></span>
+								</div>
+							</div>
+							<p class="stcz-tips">提示：单击题目即可查看题目详情</p>
+							<div class="stcz-detial" style="display: none;">
+								<div class="stcz-detial-top">
+								    <!--实际用时隐藏其中一个div-->
+									<div class="loading" style="display: none;">
+									    <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i><span>正在查找...</span>
+									</div>
+									<div class="searchTj" style="display: none;">
+									    <span>关键字【<span class="skey">内科</span>】：搜索到<span class="sres">8</span>个相关项</span>
+									</div>
+								</div>
+								<div class="stcz-detial-main" style="height: 346px;">
+									
+								</div>
+							</div>
+						</div>
+						<div class="stcz-timu">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div>		</div>
+			<script>
+				var _cateid={php echo $this->cateid};
+				var _cur = 'sousuo';//控制左侧选中菜单this
+				_treeList="{php echo $this->createMobileUrl('zjlist',array('cateid'=>$this->cateid))}";
+				</script>
+		<!--遮罩-->
+		{php include $this->template('goumai')}
+
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/js/tk.js"></script>
+
+	</body>
+</html>

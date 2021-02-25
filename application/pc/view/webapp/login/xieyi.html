@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    {include  file="public/head"}
+	<title>登录/注册</title>
+	<style>
+
+.main{min-width:1140px;width:1140px;margin:0 auto;font-size:16px;}
+.layui-elem-field div.layui-field-box{background:#fafafa;padding:80px 345px;border:1px solid #D9D9D9;}
+.layui-elem-field legend{padding:30px 10px;color:#009688;font-size:25px;}
+.tipcontent{height:30px;padding-left:110px;}
+.tipcontent p{display:none;color:red;font-size:14px;}
+.layui-form-mid{margin-right:0;padding: 0px !important;}
+.zidingyi-btn{width:136px;text-align: center;}
+.btn-bg{background: #009fa8;}
+.layui-btn-fluid{width:75%;margin-top:30px;float:right;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background:#009fa8}
+form div:first-child{margin-bottom:30px;}
+.layui-layer{top:10px !important;}
+
+/*validatemobile.php 用到的基本样式在上面*/
+form div.validate-form-item:first-child{margin-bottom:15px;}/*重新定义*/
+.sethidden{display: none;}
+
+
+.xieyi{padding:0 60px;}
+
+.layui-colla-title{font-size:17px;}
+.border-none{border:0;}
+.layui-colla-item p{cursor:pointer;}
+.return-pre{color:#009fa8;margin-top:30px;font-size:22px;font-weight:500;cursor: pointer;}
+.return-pre i{font-size:25px;padding-right:10px;}
+.select-overflow{margin-top: 10px;}
+.layui-elem-field legend{padding:15px 10px;}
+
+	</style>
+</head>
+<body>	
+	<div class="main">
+    	<div class="return-pre" onclick="out()"><i class="layui-icon layui-icon-return"></i>返回</div>
+        <fieldset class="layui-elem-field layui-field-title">
+		    <legend>使用协议</legend>
+            <div class="xieyi" style="line-height:30px;">
+                &emsp;&emsp;1、网站服务条款的确认和接纳 
+                <br>
+                &emsp;&emsp;网站各项网络服务的所有权、运作权归南京时珍教育科技有限公司所有。网站提供的服务将完全按照其发布的章程、服务条款和操作规则严格执行。您必须完全同意所有服务条款并完成注册（报名）程序方可正式使用。 
+                <br>
+                &emsp;&emsp;2、 用户信息的提供
+                <br>
+                &emsp;&emsp;基于网站所提供的网络服务的重要性，学员需同意以下条款： 
+                <br>
+                &emsp;&emsp;（1）提供详尽、准确的个人资料。
+                <br>
+                &emsp;&emsp;（2）不断更新注册（报名）资料，符合及时、详尽、准确的要求。网站不公开学员的姓名、地址、电子邮箱和笔名， 除以下情况外：
+                <br>
+                &emsp;&emsp;&emsp;&emsp;a)学员授权网站透露这些信息。 
+                <br>
+                &emsp;&emsp;&emsp;&emsp;b)相应的法律及程序要求网站提供学员的个人资料。
+                <br>
+                &emsp;&emsp;3、服务条款的修改和服务修订
+                <br>
+                &emsp;&emsp;网站有权在必要时修改服务条款，网站服务条款一旦发生变动，将会在使用页面提示修改内容。如果学员继续享用网络服务，则视为接受服务条款的变动。 
+                <br>
+                &emsp;&emsp;4、学员用户名、密码及使用限制
+                <br>
+                &emsp;&emsp;学员一旦注册（报名）成功，成为网站的合法学员，将得到一个密码和用户名，学员将对自已的用户名、密码安全及用户名的使用负全部责任； 学员的用户名仅限学员本人使用，学员以任何方式与任何第三方共享用户名或公开学习课程（包括但不限于向任何第三方透露学习课程、与他人共享用户名、将自己的用户名提供给第三方使用、将学习课程公开播放或以任何方式供多人同时使用等）都是严格禁止的； 
+                             上述情况一旦发生，我司将立即停止违规用户名的学习权限，同时我司会进一步追究违规人员的法律责任，包含但不限于追偿损失、司法追责等。
+                <br>
+                &emsp;&emsp;5、对学员信息的存储和限制
+                <br>
+                &emsp;&emsp;网站不对学员所发布信息的删除或储存失败负责。网站有判定学员行为是否符合网站服务条款要求和精神的保留权利，如果学员违背了服务条款规定，网站有中断对其提供网络服务的权利。 
+                <br>
+                &emsp;&emsp;6、学员管理
+                <br>
+                &emsp;&emsp;严禁发表、散布、传播任何反动、色情及违反国家安全、扰乱社会秩序等有害信息，学员需对自己在网上的行为承担法律责任。学员若在网站上散布和传播反动、色情或其他违反国家法律的信息，网站的系统记录将作为学员违反法律的证据。
+                <br>
+                &emsp;&emsp;7、服务变更、中断或终止
+                <br>
+                &emsp;&emsp;（1）如因系统维护或升级的需要而需暂停网络服务，将尽可能事先进行通告。
+                <br>
+                &emsp;&emsp;（2）如发生下列任何一种情形，有权随时中断或终止向用户呢提供本协议项下的任何服务而无房需通知用户：
+                <br>
+                &emsp;&emsp;&emsp;&emsp;a)用户提供的个人资料不真实；
+                <br>
+                &emsp;&emsp;&emsp;&emsp;b)用户违返本协议中规定的使用规则。
+                <br>
+                &emsp;&emsp;8、换课、退课
+                <br>
+                &emsp;&emsp;凡交费学员自交费之日起三日内可以换课，如课程间存在价格差异的在换课时需补齐价差。所购买的课程一但注册后即不可再退货。
+                <br>
+                &emsp;&emsp;9、学员咨询
+                <br>
+                &emsp;&emsp;在如下时间里您可拨打客服咨询电话，或联系客服QQ：
+                <br>
+                &emsp;&emsp;咨询客服QQ：944409477
+                <br>
+                &emsp;&emsp;咨询时间：早9:00—晚22:00 
+                <br>
+                &emsp;&emsp;10、网络服务内容的所有权
+                <br>
+                &emsp;&emsp;网站定义的网络服务内容包括：文字、软件、声音、图片、录像、图表、邮件及广告中的全部内容，网站拥有以上内容的完全版权，严禁任何个人或单位在未经网站许可的情况下对这些内容进行翻版、复制、转载、篡改等一切用于商业活动的行为；网站的学员/会员账号只为本网站的个人注册用户本人所专有，严禁一个账号多人使用，如若发现上述情况，网站将有权停止其账号使用，并没收其非法所得，并根据情节的严重程度对其实行相应罚款或述诸法律。
+                <br>
+                &emsp;&emsp;11、法律管辖
+                <br>
+                &emsp;&emsp;（1）本协议的订立、执行、解释及争议的解决均应适用于中国法律。
+                <br>
+                &emsp;&emsp;（2）如双方就本协议内容或其执行发生任何争议，学员和网站一致同意服从高等法院所有管辖。
+                <br>
+      
+            </div>
+        </fieldset>
+    </div>
+    <script>
+        function out(){
+           history.go(-1);
+        }
+    </script>
+</body>
+</html>

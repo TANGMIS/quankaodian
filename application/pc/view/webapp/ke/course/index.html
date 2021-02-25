@@ -1,0 +1,66 @@
+{extend name="ke/main"}
+{block name="content"}
+
+    <div class="breadcrumb">
+        <span class="layui-breadcrumb">
+
+            <a href="{:Url('/pc/ke/index') }">全部课程</a>
+            <a><cite>{$item.title}</cite></a>
+        </span>
+        <span class="share">
+            <a href="javascript:"  data-url="{{ favorite_url }}"><i class="layui-icon layui-icon-star icon-star"></i></a>
+
+            <a href="javascript:" title="分享到微信" data-url="{{ qrcode_url }}"><i class="layui-icon layui-icon-login-wechat icon-wechat"></i></a>
+            <a href="javascript:" title="分享到QQ空间"><i class="layui-icon layui-icon-login-qq icon-qq"></i></a>
+            <a href="javascript:" title="分享到微博"><i class="layui-icon layui-icon-login-weibo icon-weibo"></i></a>
+        </span>
+    </div>
+
+
+    {include file="ke/course/show_meta" /}
+    <div class="layout-main clearfix">
+        <div class="layout-content">
+            <div class="course-tab-wrap wrap">
+                <div class="layui-tab layui-tab-brief course-tab">
+                    <ul class="layui-tab-title">
+                        {if $type!=4}
+                        <li class="layui-this">目录</li>
+                        {/if}
+                        <li >详情</li>
+                        {if $type==4}
+                        <li>直播回放</li>
+                        {/if}
+                    </ul>
+                    <div class="layui-tab-content">
+                        {if $type!=4}
+                        <div class="layui-tab-item layui-show">
+                            {include file="ke/course/show_catalog" /}
+                        </div>
+                        {/if}
+                        <div class="layui-tab-item {if $type==4}layui-show{/if}" >
+                            {if $type==4}
+                            <a class="layui-btn layui-btn-fluid layui-bg-green btn-buy" href="{:Url('live/index',array('stream_name'=>$liveInfo.stream_name,'record_id'=>''))}">{$livestauts}</a>
+                            <div style="margin:0px auto;text-align:center;color:#c2c2c2;line-height:25px">
+                                <span style="margin:5px">开始时间：{$liveInfo.start_play_time}</span><span  style="margin:5px">结束时间：{$liveInfo.stop_play_time}</span>
+                            </div>
+                            {/if}
+                            <div class="course-details markdown-body">{$item.content}</div>
+                        </div>
+                        {if $type==4}
+                        <div class="layui-tab-item">
+                            <div class="course-details markdown-body"></div>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-sidebar">
+            {include file="ke/course/show_order" /}
+            {include file="ke/course/show_teacher" /}
+        </div>
+
+    </div>
+    {include file='goumai'}
+    <link rel="stylesheet" type="text/css" href="{__WAP_PATH}ke/css/markdown.css">
+{/block}

@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>题库</title>
+	</head>
+	<body>
+<div class="layui-main">
+	<div class="define-top">
+					<div class="left-logo"></div>
+					<div class="menu layui-clear">
+						{include  file="ttopnav" /}
+					</div>
+	</div>
+	<div class="define-content layui-clear">
+	<div class="content-left">
+	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+	{include  file="tleft"}
+	</ul>
+	</div>
+	<div class="content-right">
+		<div class="tiku" style="display: block;">
+			<div class="top-menu sp-bbottom">
+				<div class="title">{$item.cname}</div>
+				<div class="jihuo-icon">{if $isopenc==1}已激活{else}未激活{/if}</div>
+			
+			</div>
+			<div class="kszn layui-clear " style="overflow-y: auto;height:100%">
+				<table class="table  shareBox">
+					<TR><Td>
+						<div class="modeA fl">
+							<h4>邀请方式一：将您的邀请专属链接发送给您的好友</h4>
+							<input type="text" size="30" id="url" value="{$speadurl}" readonly>
+							<button onClick="url.select();document.execCommand('Copy');layer.msg('已复制链接')">复制链接</button>
+						</div>
+					</Td></TR>
+					<tr><Td>
+						<div class="rewardBox tabSwitch">
+							<ul class="tabTitle clearfix">
+								<li class="active">我的奖励</li>
+							</ul>
+							<div class="rewardList tabCont showBox">
+								<div class="topBox clearfix">
+									<h4 class="fl rewardPic">
+										<img src="{__WAP_PATH}images/rewardPic.png" style="width:100%"/>
+										<p><b>30%</b><i>收益</i></p>
+									</h4>
+									<div class="rewardInfo fl">
+										<div class="numBox clearfix">
+											<div class="num fl">
+												<p>{$userInfo.brokerage_price}</p>
+												<h5>可提现</h5>
+											</div>
+											<div class="num fl">
+												<p>{$data.one_spread_count}</p>
+												<h5>已邀请人数</h5>
+											</div>
+										</div>
+										<dl>
+											<dt>其中</dt>
+											<dd>今日新增：<b>{$data.spread_count}</b></dd>
+											<dd>总订单：<b>{$data.order_count}</b></dd>
+										</dl>
+									</div>
+								</div>
+								<dl class="explainBox">
+									{$promoter_content}
+	
+								</dl>
+							</div>
+					</div>
+					</Td></tr>
+	
+				</table>
+			</div>
+			</div>
+		
+		</div>
+
+	</div>
+</div>
+</div>
+
+<div class="ckst-dati layui-layer layui-layer-dialog" style="display: none;width: 50%;height:50%;position: absolute;background:#fff;left: 0;right: 0;top:0;bottom: 0;margin: auto;overflow-y: auto;">
+	<div class="ckst-timu">
+		正在加载中....
+	</div>
+</div>
+
+
+		<!--遮罩-->
+		{include  file="goumai"}
+		<script>
+		var _cur = 'mycuoti';//控制左侧选中菜单this
+		var _tkExamInfo="{:Url('tqueview',array('cateid'=>$id))}";
+		</script>
+<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script>
+	layui.use(['jquery', 'layer' ,'element','form'], function(){ 
+    var $ = layui.$ //重点处
+    ,layer = layui.layer
+    ,element = layui.element
+	,form = layui.form;
+	$('.ckst').click(function(){
+		$(".ckst-dati").show();
+		$('.ckst-timu').html("正在加载中......");
+    	var protype = $(this).attr('data-type');
+		var id = $(this).attr('data-id');
+		console.log(id);
+		console.log(protype);
+		$.post(_tkExamInfo,{'id':id,"protype":protype},function(resp){
+				$('.ckst-timu').html(resp);
+				form.render();
+		});
+	});
+	$(document).on('click','.exam-close-button',function(){
+		$(".ckst-dati").hide();
+	})
+});
+</script>
+
+<style>
+.fl{float: left;}
+.fr{float:right}
+.clearfix::after{content: "";clear: both;display: block;height: 0;visibility: hidden;}
+.clearfix:after,.clearfix:before{content: "";display: table;}
+.clearfix:after{clear: both;}
+.clearfix{*zoom: 1;}
+.shareBox .modeA{padding: 0 20px;width: 430px;}
+.shareBox h4{font-size: 16px;color: #333333;font-weight: bold;text-align: center;padding-top: 36px;}
+.shareBox .modeA input{width: 430px;height: 48px;text-align: center;background: #f1f1f1;border: 0;font-size: 14px;color: #333333;margin-top: 12px;}
+.shareBox .modeA button{margin-top: 20px;width: 96px;height: 30px;border-radius: 5px;}
+.shareBox .modeB{text-align: center;padding: 0 40px;}
+.shareBox .modeB .picBox{margin-top: 20px;}
+.shareBox .modeB .tips{font-size: 14px;color: #666666;margin-top: 12px;}
+.rewardBox{padding-top: 20px;}
+.rewardBox  ul{height: 48px;border-bottom: 3px solid #ebebeb;}
+.rewardBox  ul li{width: 100px;text-align: center;float: left;line-height: 48px;height: 48px;font-size: 18px;color: #333;margin-right: 20px;cursor: pointer;}
+.rewardBox  ul li.active{border-bottom: 3px solid #4553ac;font-weight: bold;}
+.rewardList{padding: 20px;background: #f1f1f1;margin-top: 20px;}
+.rewardList .rewardPic{position: relative;}
+.rewardList .rewardPic p{position: absolute;left: 0;top: 150px;font-size: 18px;color: #fefefe;padding-left: 152px;}
+.rewardList .rewardPic p b{font-size: 55px;font-weight: bold;margin-right: 5px;}
+.rewardList .rewardPic p i{vertical-align: 4px;}
+.rewardPic img{width:100%}
+.rewardList .rewardInfo {width: 410px;padding-left: 30px;}
+.rewardList .rewardInfo dl{font-size: 14px;color: #333333;}
+.rewardList .rewardInfo .numBox{border-bottom: 1px solid #ebebeb;text-align: center;padding: 25px 20px;}
+.rewardList .rewardInfo .numBox p{font-size: 40px;font-weight: bold;color: #333;}
+.rewardList .rewardInfo .numBox h5{font-size: 14px;color: #666666;margin-top: 10px;}
+.rewardList .rewardInfo .numBox .num{width: 50%;}
+.rewardList .rewardInfo dl{padding-left: 18px;font-size: 14px;color: #333;padding-top: 35px;}
+.rewardList .rewardInfo dd{margin-top: 12px;}
+.rewardList .rewardInfo dd b{font-weight: bold;margin:0 10px 0 20px;}
+.rewardList .explainBox{padding-top: 26px;font-size: 14px;color: #666;}
+.rewardList .explainBox dd{margin-top: 10px;}
+</style>
+	</body>
+</html>

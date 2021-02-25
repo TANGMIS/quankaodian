@@ -1,0 +1,37 @@
+<div class="course-meta wrap clearfix">
+    <div class="cover">
+        <img src="{$item.image}" alt="{{ course.title }}">
+    </div>
+    <div class="info">
+        <p class="item">
+            <span class="key">课程时长：</span><span class="value">共{$chapters.count}章{$chapters.chapter}节</span>
+        </p>
+        <p class="item">
+            <span class="key">浏览量：</span><span class="value free">{$item.browse_count}次</span>
+        </p>
+        <p class="item">
+            <span class="key">市场价格：</span><span class="value price">{$item.money}元</span> <span class="key">已售：</span><span class="value price">{$item.fake_sales}</span>
+               
+        </p>
+        <p class="item">
+            <span class="key">会员价格：</span><span class="value free">{if $item.member_pay_type==0}免费{else/}{$item.member_money}元{/if}</span>
+        </p>
+    </div>
+    <div class="rating">
+        <p class="item">
+            <span class="name">内容实用</span>
+            <span class="star"><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i>4.2</span>
+            <span class="score">分</span>
+        </p>
+        <p class="item">
+            <span class="name">简洁易懂</span>
+            <span class="star"><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i>4.3</span>
+            <span class="score">分</span>
+        </p>
+        <p class="item">
+            <span class="name">逻辑清晰</span>
+            <span class="star"><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i><i class="layui-icon layui-icon-star-fill"></i>4.9</span>
+            <span class="score">分</span>
+        </p>
+    </div>
+</div>

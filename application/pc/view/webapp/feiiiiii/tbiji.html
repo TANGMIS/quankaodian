@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="{MODULE_URL}template/webapp/layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tk.css"/>
+		<title>题库首页</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}
+</ul>
+<div class="fade-icon-shousuo"></div>				</div>
+				<div class="content-right">
+					<div class="cuoti" style="display: block;">
+					
+						<div class="liebiao-detail" style="display: block;">
+							<div class="top-menu">
+								<div class="title set-title">{php echo $this->PoolData["cname"]}</div>
+								<span class="icon-return">返回上一页</span>
+							</div>
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+	
+							    <div class="layui-tab-content"><div class="layui-tab-item top-tip layui-show">
+
+    <div class="tab-list" style="height: 372px;">
+		{loop $data["listdata"] $k $v}
+		<?php
+			$tdata=$tQue->getTques($v['tQueid'],$fix);
+		?>
+		<div class="layui-elem-quote weida"><?php echo $k+1?>、{$tdata['queText']}<span class="ckst" data="{$v['tQueid']}" data-protype="{$v['protype']}">查看试题</span>
+		<div style="background:rgb(223, 221, 221); margin: 20px;padding: 10px;"><span style="color: black;">笔记内容：</span>{$v["context"]}</div>
+		</div>
+		{/loop}
+
+    </div>
+</div>
+</div>
+
+
+<div class="kstk-dati">
+	<div class="ksdt-timu">
+	</div>
+</div>
+							</div> 
+						</div>
+				
+					</div>
+				</div>
+			</div>
+			<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div>		</div>
+			<script>
+				var _cateid={php echo $this->cateid};
+				var _cur = 'biji';//控制左侧选中菜单this
+				_treeList="{php echo $this->createMobileUrl('zjlist',array('cateid'=>$this->cateid))}";
+				var _thomedetail="{php echo $this->createMobileUrl('thomedetail',array('cateid'=>$this->cateid))}";
+				</script>
+		<!--遮罩-->
+		{php include $this->template('goumai')}
+		<script src="{MODULE_URL}template/webapp/layui/layui.js" charset="UTF-8"></script>
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/js/tk.js"></script>
+<script src="{MODULE_URL}template/webapp/js/yt.js"></script>
+
+	</body>
+</html>

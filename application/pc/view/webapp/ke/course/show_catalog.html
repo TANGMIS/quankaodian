@@ -1,0 +1,94 @@
+
+<div class="layui-collapse">
+    {volist name="chapters.data" id="chapter" }
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">{$chapter.title}</h2>
+            <div class="layui-colla-content layui-show">
+                <ul class="lesson-list">
+                    {volist name="chapter.children" id="lesson"}
+   
+                        {if condition="$type==4"}
+                            <li class="lesson-item clearfix">
+                                <a class="view-lesson" href="{:Url('chapter')}">
+                                    <i class="layui-icon layui-icon-video"></i>
+                                    <span class="title">{lesson.title}</span>
+                                    {if condition="lesson.pay_status == 0"}
+                                        <span class="layui-badge free-badge">免费</span>
+                                    {/if}
+                               
+                                        <span class="study-time" ></span><i class="layui-icon layui-icon-time"></i></span>
+                  
+                                    <span class="live">
+                                        <span class="pending">{$liveInfo.start_play_time} {$livestauts}</span>
+                                    </span>
+                                </a>
+
+                            </li>
+                        {elseif condition="$type!=4"}
+                            <li class="lesson-item clearfix">
+                                <a class="view-lesson" href="{:Url('chapter',array('id'=>$lesson.id,'special_id'=>$special_id))}">
+                                {if condition="$type==1"}
+                                <i class="layui-icon layui-icon-read"></i>
+                                {/if}
+                                {if condition="$type==3"}
+                                <i class="layui-icon layui-icon-video"></i>
+                                {/if}
+                                {if condition="$type==2"}
+                                <i class="layui-icon layui-icon-video"></i>
+                                {/if}
+                                <span class="title">{$lesson.title}</span>
+                                {if condition="$lesson.pay_status == 0"}
+                                    <span class="layui-badge free-badge">免费</span>
+                                {/if}
+                              
+                                   
+                               
+                            </a></li>
+                        {/if}
+                        {/volist}
+                </ul>
+            </div>
+        </div>
+        {/volist}
+</div>
+<script>
+    var get_course_list="{:Url('ke/get_course_list',array('special_id'=>$special_id))}";
+</script>
+<script>
+    layui.use(['flow','jquery'], function(){
+    var $ = layui.$; //重点处
+
+      var flow = layui.flow;
+      flow.load({
+        elem: '#LAY'
+        ,done: function(page, next){
+        var lis = [];
+        $.get(get_course_list+'&page='+page,function(res){
+            console.log(res);
+            var data=res.data.data;
+            layui.each(data, function (index, item) {
+                var typetext='';
+            var html='<div class="layui-col-md3">';
+                html=html+'<div class="course-card">';
+                html=html+'<div class="cover">';
+                html=html+'<a href="/pc/ke/course/special_id/'+item.id+'.html">';
+                html=html+'<img src="'+item.image+'" >';
+                html=html+'</a>';
+                html=html+'</div>';
+                html=html+'<div class="info " >';
+                html=html+'<div class="title layui-elip"><a  href="/pc/ke/course/special_id/'+item.id+'.html" >'+item.title+'<span style="color:red">['+typetext+']</span></a></div>';
+                html=html+'<div class="meta">';
+                html=html+'<span class="price">会员￥'+item.member_money+'</span>';
+                html=html+' <span class="user">'+item.browse_count+'人购买</span>';
+                html=html+'</div>';
+                html=html+'</div>';
+                html=html+'</div>';                
+                html=html+'</div>';
+
+                lis.push(html);
+            });
+            next(lis.join(''), page < res.data.totalpage); 
+        },'json')}
+      });
+    });
+  </script> 

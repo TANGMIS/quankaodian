@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tkExam.css"/>
+
+		<title>题库首页</title>
+		<script>
+			function ct()
+			{
+				if(confirm('确定要退出吗')==true){
+					history.go(-1);
+				}else{
+					return false;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="exam-chuangkou" style="background-color: rgb(0, 159, 168); display: block;"><div class="eaxm-close layui-clear"><button class="layui-btn layui-btn-sm exam-close-button" style="background-color: rgb(0, 159, 168);" onclick="ct();">退出考试</button></div> 
+			<div class="exam-right">
+				<div class="right-top">
+					<span class="layui-badge layui-bg-blue">已答</span>
+					<span class="layui-badge">在答</span>
+					<span class="layui-badge layui-bg-gray">未答</span>
+				</div>
+				<div class="right-main">
+					<div class="layui-collapse">
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title" style="background-color: rgb(0, 159, 168);">单选题<i class="layui-icon layui-colla-icon"></i></h2>
+							<div class="show-timu layui-colla-content layui-show">
+								
+								{loop $dxdata $k $v}
+								<?php
+								$ct++;
+								?>
+								<span class="" data-id="<?php echo $ct?>" data-tx="1" data-type="{$v['queTypeId']}" data-typename="单选题"><?php echo $k+1?></span>
+								{/loop}
+
+							</div>
+						</div>
+							
+		
+
+
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title" style="background-color: rgb(0, 159, 168);" data-typename="多选题">多选题<i class="layui-icon layui-colla-icon"></i></h2>
+							<div class="show-timu layui-colla-content layui-show">
+								
+								{loop $doxdata $k $v}
+								<?php
+								$ct++;
+								?>
+								<span class="" data-id="<?php echo $ct?>" data-tx="1" data-type="{$v['queTypeId']}"><?php echo $k+1?></span>
+								{/loop}
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="exam-left">
+				<div class="left-top">
+					<p>
+						<span>当前试室：第一试室</span>
+						<span>当前场次：第01场</span>
+						<span>座位号:01</span>
+					</p>
+					<p>
+						<span>姓名：测试001</span>
+						<span>性别：男</span>
+						<span>准考证号：10001</span>
+						<span>报考专业：第一单元 试题一</span>
+					</p>
+				</div>
+				<div class="left-main" style="background-color: #ffffff">
+					<div class="setting-fontSize">
+				    	<div class="setting-parent">
+				    		<i class="layui-icon layui-icon-set"></i>
+				    	    <span class="setting-icon">字号设置</span>
+				    	</div>
+				    	<div class="fontSize-body">
+				    		<span class="up-sjx"></span>
+				    		<p>字体大小：</p>
+				    		<p>
+				    			<span class="smaller ">小</span>
+				    			<span class="small defaultColor">中</span>
+				    			<span class="big ">大</span>
+				    			<!-- <span class="bigger ">超大</span> -->
+				    		</p>
+				    	</div>
+				    </div>
+					<form class="layui-form">
+															
+						{loop $dxdata $k $v}
+						<?php
+						$vct++;
+						?>
+							<div class="sttk layer-photos-demo" id="layer-photos-demo<?php echo $vct?>" data-id="<?php echo $vct?>" {if $k>0} style="display: none;"{/if}>
+							<div class="sttk-main">
+					    		<div class="form-label" style="font-size: 22px;">{$v["queText"]}</div>
+					    		<div class="layui-input-block">
+					    		<input type="hidden" name="answer<?php echo $vct?>" value="{$v['answer']}">
+								<textarea name="prompt<?php echo $vct?>" style="display: none;">{$v['prompt']}</textarea>
+								<?php
+									$optionList=$tQueOpt->GettQueOpts($v["queId"],$fix);
+								?>
+								{loop $optionList $ok $ov}
+								<input type="radio" name="radio{$vct}" value="{$ov['optName']}" data="<?php echo $vct?>" data-id="{$v['queId']}" title="{$ov['optName']}.{$ov['optText']}"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div style="font-size: 22px;">{$ov['optName']}.{$ov['optText']}</div></div>
+								{/loop}
+							  </div>
+							    <div id="showResult<?php echo $vct?>" class="dats" style="display: none;"><p><span style="color:#ff0000">您的答案：D&nbsp;答题错误，继续努力</span></p><p>正确答案：E</p><p>解析：实验法最常被用于实验室中，但也可用于临床研究中。该法的主要特点是在控制条件下，实验者系统地操纵或改变一个或几个变量，观察、测量和记录对其他变量的影响。</p></div>
+							    <div class="yxj-icon">
+							    	<div class="right-icon">
+							    	    <span class="jiucuo-icon" data-queid="{$v['queId']}" data-cateid="{$cateid}">纠错</span>
+							    	</div>
+							    </div>
+							</div>
+						</div>
+						{/loop}
+					
+					
+						
+						{loop $doxdata $k $v}
+						<?php
+						$vct++;
+						?>
+						<div class="sttk layer-photos-demo" id="layer-photos-demo<?php echo $vct?>"  data-id="<?php echo $vct?>" style="display: none;">
+						<div class="sttk-main">
+							<div class="form-label" style="font-size: 22px;">{$v["queText"]}</div>
+							<div class="layui-input-block">
+							<input type="hidden" name="answer<?php echo $vct?>" value="{$v['answer']}">
+							<textarea name="prompt<?php echo $vct?>" style="display: none;">{$v['prompt']}</textarea>
+							<?php
+								$optionList=$tQueOpt->GettQueOpts($v["queId"],$fix);
+							?>
+							{loop $optionList $ok $ov}
+							<input type="checkbox" name="checkbox<?php echo $vct?>" lay-skin="primary" value="{$ov['optName']}" title="{$ov['optName']}.{$ov['optText']}" >
+							{/loop}
+				
+						 <button type="button" class="sure layui-btn layui-btn-sm"  data="<?php echo $vct?>" data-id="{$vo['queId']}" data-cateid="{$cateid}">确认</button>
+						
+						  </div>
+							<div id="showResult<?php echo $vct?>" class="dats" style="display: none;"><p><span style="color:#ff0000">您的答案：D&nbsp;答题错误，继续努力</span></p><p>正确答案：E</p><p>解析：实验法最常被用于实验室中，但也可用于临床研究中。该法的主要特点是在控制条件下，实验者系统地操纵或改变一个或几个变量，观察、测量和记录对其他变量的影响。</p></div>
+							<div class="yxj-icon">
+								<div class="right-icon">
+									<span class="jiucuo-icon" data-queid="{$v['queId']}" data-cateid="{$cateid}">纠错</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					{/loop}
+				
+					
+					
+															
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+										</form>
+				</div>
+				<div class="left-bottom">
+					<button class="layui-btn pre-timu" style="background-color: rgb(0, 159, 168);"><i class="layui-icon layui-icon-left"></i>上一题</button>
+					<button class="layui-btn next-timu" style="background-color: rgb(0, 159, 168);"><i class="layui-icon layui-icon-right"></i>下一题</button>
+					<button class="layui-btn layui-btn-sm jiaojuan" data="0" style="background-color: rgb(0, 159, 168);">交卷</button>
+					<div class="dati-tip">
+						<span>试题总数：{$zs}题</span>
+						<span class="ydNums">已答：1题</span>
+					</div>
+				</div>
+			</div>
+
+
+
+</div>
+
+<script>
+	var _shiyong=0;
+	var _examLog = '';
+	var _cateid={php echo $this->cateid};
+	var _myFontSize = "22px";
+	var _saveYtLog="{php echo $this->createMobileUrl('saveYtLog',array('cateid'=>$this->cateid))}";
+</script>
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/js/tk.js"></script>
+<script src="{MODULE_URL}template/webapp/js/yt.js"></script>
+
+	</body>
+</html>

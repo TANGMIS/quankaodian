@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>题库首页</title>
+		<style>
+			.tra{background: #009fa8; border-radius: 25px;height:30px; line-height: 30px;text-align: center;margin: 20px;padding: 0px 20px;color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{include  file="tleft"}
+				</ul>
+			    </div>
+				<div class="content-right">
+					<div class="cuoti" style="display: block;">
+					
+						<div class="liebiao-detail" style="display: block;">
+							<div class="top-menu">
+								<div class="title set-title">{$item["cname"]}<a href="{:Url('tindex/sindex')}" class="tra">切换</a></div></div>
+							
+							</div>
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+			<div class="layui-tab-content">
+			<div class="layui-tab-item top-tip layui-show">
+				<div class="layui-elem-quote">
+					<p>题库试题</p>
+				</div>
+			<div class="shiti">
+				{volist name="tdata" id="v"}
+				<div class="yt-list">
+					<span  style="font-weight: bold;">{$v["queTypeName"]}：</span>
+					<span>{$v["memo"]}</span>
+					<span class="show-kaoshi rukou-icon show-exam-xitong" data="{$v['queTypeId']}" data-ty="tk">开始练习</span>
+				</div>
+				{/volist}
+				<div class="layui-elem-quote">
+					<p>押题圈题</p>
+				</div>
+	
+					{volist name="ytqtdata" id="v"}
+					<div class="yt-list">
+						<span  style="font-weight: bold;">{$v["queTypeName"]}：</span>
+						<span>{$v["memo"]}</span>
+						<span class="show-kaoshi rukou-icon show-exam-xitong" data="{$v['queTypeId']}" data-ty="yt">开始练习</span>
+					</div>
+					{/volist}
+
+</div>
+</div>
+							</div> 
+						</div>
+		
+					</div>
+
+	
+				</div>
+			</div>
+		
+		<!--遮罩-->
+
+					<!--考试页面-->
+					<div class="exam-chuangkou">
+						<span class="exam-close-button">关闭</span>
+						<div class="tip-content"></div> 
+					</div>
+		{php include $this->template('goumai')}
+		<script>
+			var _cateId={$id};
+			var _myFontSize = "22px";
+			var _qxh = "0";
+			var _cur = 'tiku';//控制左侧选中菜单this
+			var _zid=0;
+			_treeList="{:Url('treeList',array('cateid'=>$id))}";
+			_tkExamInfo="{:Url('lianxitemplate',array('cateid'=>$id))}";
+			_ytkExamInfo="{:Url('ytlianxitemplate',array('cateid'=>$id))}";
+			_shouCang="{:Url('userfav',array('cateid'=>$id))}";
+			_saveNote="{:Url('usebiji',array('cateid'=>$id))}";
+			_Jiucuo="{:Url('usejiucuo',array('cateid'=>$id))}";
+			_saveYtLog ="{:Url('usercuoti',array('cateid'=>$id))}";
+			</script>
+	<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+	<script src="{__WAP_PATH}js/comm.js"></script>
+	<script src="{__WAP_PATH}js/commcp.js"></script>
+	<script src="{__WAP_PATH}js/tkExam.js"></script>
+<script>
+	//做题交互
+	$(document).on('click','.show-exam-xitong',function(){
+		var _ztype = $(this).attr('data');
+		var typ = $(this).attr('data-ty');
+		if(typ=='tk'){
+			_url=_tkExamInfo;
+		}
+		else{
+			_url=_ytkExamInfo;
+		}
+		tExam(_url,_ztype);
+	    $(".exam-chuangkou").show();
+	})
+//开始练习
+function tExam(_tkExamInfo,_type){
+		_examLog = '';
+		$('.exam-chuangkou').html('<div style="font-size:18px;line-height:30px;text-align:center;width:100%;">题目加载中...</div>');
+		$.post(_tkExamInfo,{'type':_type},function(resp){
+			console.log(resp)
+				$('.exam-chuangkou').html(resp);
+				layui.form.render();
+		});
+	}
+</script>
+	</body>
+</html>

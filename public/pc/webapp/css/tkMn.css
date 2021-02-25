@@ -1,0 +1,86 @@
+.layui-nav .layui-nav-item a span.imgbg1{background: url("../img/icons.png") 0 0 no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg2{background: url("../img/icons.png") 0 -26px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg3{background: url("../img/icons.png") 0 -52px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg4{background: url("../img/icons.png") 0 -78px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg5{background: url("../img/icons.png") 0 -104px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg6{background: url("../img/icons.png") 0 -130px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg8{background: url("../img/icons.png") 0 -182px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg10{background: url("../img/icons.png") 0 -234px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg11{background: url("../img/icons.png") 0 -260px no-repeat;}
+.layui-nav .layui-nav-item a span.imgbg12{background: url("../img/icons.png") 0 -208px no-repeat;}
+.layui-nav-tree .layui-this>a span.imgbg1{background-position: -26px 0;}
+.layui-nav-tree .layui-this>a span.imgbg2{background-position: -26px -26px;}
+.layui-nav-tree .layui-this>a span.imgbg3{background-position: -26px -52px;}
+.layui-nav-tree .layui-this>a span.imgbg4{background-position: -26px -78px;}
+.layui-nav-tree .layui-this>a span.imgbg5{background-position: -26px -104px;}
+.layui-nav-tree .layui-this>a span.imgbg6{background-position: -26px -130px;}
+.layui-nav-tree .layui-this>a span.imgbg8{background-position: -26px -182px;}
+.layui-nav-tree .layui-this>a span.imgbg10{background-position: -26px -234px;}
+.layui-nav-tree .layui-this>a span.imgbg11{background-position: -26px -260px;}
+.layui-nav-tree .layui-this>a span.imgbg12{background-position: -26px -208px;}
+.shipin-yxq{font-size:14px;float:right;color:red;padding-right:20px;}
+.sp-bbottom{border-bottom:1px solid #ccc;-webkit-box-shadow: 0px 0px 5px #BABABA;-moz-box-shadow:0px 0px 5px #BABABA;box-shadow: 0px 0px 5px #BABABA;}
+.top-menu{border-bottom:none;}
+.content-right .moni{overflow: hidden;}
+.mnkc{display: flex;}
+.mnkc-right{width:25%;padding-left:5px;}
+.mnkc-rightr{width:25%;padding-left: 5px;}
+.mnkc-left{padding-left: 5px;width:50%;}
+.yiji ul{margin-top:1px;}
+.yiji li{padding:10px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;cursor: pointer;border-bottom:1px solid #ccc;}
+.caidan-yiji,.candan-erji{position:relative;border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.yiji span:hover {
+    background: #009fa8;
+    color: #fff;
+    cursor: pointer;
+}
+.yiji span.zuoti-icon,.yiji span.zuoti-icon-del {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 1px 3px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+.kstk {
+    height: 481px;
+    overflow-y: auto;
+    position: relative;
+}
+.kstk-mulu{/*height:485px;*/overflow-y: auto;}
+.kstk{height:481px;overflow-y: auto; position: relative;}
+.kstk-return{padding:5px 10px;font-size:14px;position:absolute;top:7px;right:25px;border:1px solid #009fa8;cursor: pointer;color:#009fa8;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;}
+.kstk-return:hover{background-color:#009fa8;color:#fff}
+.kstk-caidan,.kstk-xxjd{font-weight:bold;padding:10px 15px;border-bottom:1px solid #ccc;overflow: hidden;}
+.kstk-xxjd span{float:right;font-size:15px;}
+.kstk-left{/*height:485px;*/overflow-y: auto;}
+.kstk-liebiao{font-size:16px;border-bottom:1px solid #ccc;padding:5px 15px;}
+.kstk-liebiao:hover{background:#F5F4F4}
+.kstk-mulu-bg{background:#F5F4F4}
+.this-cdshow{background:#ecf5f6}
+.yiji span.zhankai-arror{position:absolute;top:19px;left:10px;width:15px;height:8px;background:url("../img/icons.png") -296px -447px no-repeat}
+.yiji span.bihe-arror{position:absolute;top:13px;left:10px;width:8px;height:15px;background:url("../img/icons.png") -296px -432px no-repeat}
+.yiji ul.hide-ul{display: none;}
+.candan-erji{border-bottom:1px solid #ccc;}
+.erji{margin-left:30px;}
+.erji ul{margin-left:30px;}
+.erji ul li:hover{background:#f2f2f2;}
+.layui-form-checkbox[lay-skin=primary]{height:auto !important;}
+.layui-form-checkbox[lay-skin=primary] span{font-size:16px;}
+.caidan-list{/*height:493px;*/overflow-y: auto;border-right:1px solid #ccc;}
+.mnkc-ltitle{font-weight:bold;padding:8px 15px;border-bottom:1px solid #ccc;overflow: hidden;-webkit-box-shadow: 0px 0px 5px #BABABA;-moz-box-shadow:0px 0px 5px #BABABA;box-shadow: 0px 0px 5px #BABABA;}
+.layui-table td, .layui-table th{font-size:16px;text-align:center;padding:5px 15px;}
+.layui-table .table-input{width:100px;height:30px;text-align: center;border:none;}
+.yiji-list,.erji-list{display: none;}
+.mytableMn{overflow-y: auto;overflow-x: hidden;}
+.mnkc-right button{font-size:17px;margin:60px 170px;}
+.caidan-list .layui-form-checkbox[lay-skin=primary]{display: block;}
+.caidan-list .layui-form-checkbox[lay-skin=primary] i{float:left;position:static;}
+.caidan-list .layui-form-checkbox[lay-skin=primary] span{float:none;}
+
+/*答题页面*/
+.exam-chuangkou .layui-form-checkbox[lay-skin=primary]{display: block;padding:15px 0;}
+.exam-chuangkou .layui-form-checkbox[lay-skin=primary] i{float:left;position:static;}
+.exam-chuangkou .layui-form-checkbox[lay-skin=primary] span{float:none;font-size:17px;color:#000;}
+/*修改考试页面题目布局*/
+.layui-input-block .layui-unselect div{width:615px;}
+.layui-input-block .layui-unselect span{width:630px;text-overflow:inherit;white-space: normal;}

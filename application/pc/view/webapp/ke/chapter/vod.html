@@ -1,0 +1,180 @@
+{extend name="ke/main"}
+{block name="content"}
+<script type="text/javascript" src="{__WAP_PATH}js/jquery-1.7.js"></script>
+<script type="text/javascript" src="{__WAP_PATH}js/jquery.qrcode.min.js"></script>
+<link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/2.9.1/skins/default/aliplayer-min.css">
+<script src="//g.alicdn.com/de/prismplayer/2.9.1/aliplayer-min.js"></script>
+<script type="text/javascript" src="//g.alicdn.com/de/prismplayer/2.9.1/hls/aliplayer-hls-min.js"></script>
+<script src="//g.alicdn.com/de/prismplayer/2.9.1/hls/aliplayer-vod-min.js"></script>
+    <div class="breadcrumb">
+        <span class="layui-breadcrumb">
+            <a href="{:Url('/pc/ke/index') }">全部课程</a>
+            <a><cite>{$taskInfo.title }</cite></a>
+        </span>
+        <span class="share">
+           
+            <a href="javascript:" title="分享到微信"><i class="layui-icon layui-icon-login-wechat icon-wechat"></i></a>
+            <a href="javascript:" title="分享到QQ空间"><i class="layui-icon layui-icon-login-qq icon-qq"></i></a>
+            <a href="javascript:" title="分享到微博"><i class="layui-icon layui-icon-login-weibo icon-weibo"></i></a>
+        </span>
+    </div>
+
+    <div class="layout-main clearfix">
+        <div class="layout-content">
+            <div class="player-wrap wrap">
+                {if $taskInfo.type==3 || $taskInfo.type==2}
+                <div  id="player"  class="prism-player"></div>
+                {/if}
+                {if $taskInfo.type==1}
+                <div style="overflow-y: scroll;height:100%">{$taskInfo.content}</div>
+                {/if}
+            </div>
+        </div>
+        <div class="layout-sidebar">
+            {include file="ke/chapter/catalog" /}
+
+        </div>
+    </div>
+
+
+    <div class="layui-hide">
+        <input type="hidden" name="share.title" value="{$taskInfo.title}">
+        <input type="hidden" name="share.pic" value="{$taskInfo.image}">
+        <input type="hidden" name="share.url" value="{:Url('course')}">
+        <input type="hidden" name="share.qrcode" value="">
+    </div>
+<script>
+    var get_video = "{:Url('get_video_playback_credentials')}";
+    var videoId = "{$taskInfo.videoId}";
+    var type = "{$taskInfo.type}";
+    layui.use(['jquery', 'helper'], function () {
+        var $ = layui.jquery;
+        var helper = layui.helper;
+        callPlayAuth();
+        // 获取播放凭证
+        function callPlayAuth() {
+            $.post(get_video, { type: 2, videoId: videoId }, function (res) {
+                console.log(res);
+                getPlayAuth(res.msg);
+            }, 'json')
+        }
+        function getPlayAuth(url) {
+            var xhr = new XMLHttpRequest();
+            var that = this;
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+        
+                    if (type ==='2') {
+  
+                        that.player = new Aliplayer({
+                            id: 'player',
+                            "width": "100%",
+                            "height": "430px",
+                            vid: data.VideoMeta.VideoId,
+                            playauth: data.PlayAuth,
+                            format: 'mp3',
+                            mediaType: 'audio',
+                            encryptType: 1,
+                            autoplay: false,
+                            skinLayout: [
+                                { name: "bigPlayButton", align: "cc" },
+                                {
+                                    name: "H5Loading", align: "cc"
+                                },
+                                { name: "errorDisplay", align: "tlabs", x: 0, y: 0 },
+                                { name: "infoDisplay" },
+                                { name: "tooltip", align: "blabs", x: 0, y: 56 },
+                                { name: "thumbnail" },
+                                {
+                                    name: "controlBar", align: "blabs", x: 0, y: 0,
+                                    children: [
+                                        { name: "progress", align: "blabs", x: 0, y: 44 },
+                                        { name: "playButton", align: "tl", x: 15, y: 12 },
+                                        { name: "timeDisplay", align: "tl", x: 10, y: 7 },
+                                        { name: "fullScreenButton", align: "tr", x: 10, y: 12 },
+                                        { name: "subtitle", align: "tr", x: 15, y: 12 },
+                                        { name: "setting", align: "tr", x: 15, y: 12 },
+                                        { name: "volume", align: "tr", x: 5, y: 10 }
+                                    ]
+                                }
+                            ]
+                        });
+                        that.player.on('ready', function () {
+                            that.audioPlayer.duration = data.VideoMeta.Duration;
+                        }.bind(this));
+                        that.player.on('ended', function () {
+                            that.audioPlayer.paused = true;
+                        }.bind(this));
+                        that.player.on('timeupdate', function () {
+                            that.audioPlayer.currentTime = that.player.getCurrentTime();
+                            that.audioPlayer.range = Math.floor(that.player.getCurrentTime() / that.player.getDuration() * 100);
+                        }.bind(this));
+                        that.player.on('error', function (event) {
+                            console.error(event);
+                        }.bind(this));
+                    } else {
+                        that.player = new Aliplayer({
+                            id: 'player',
+                            "width": "100%",
+                            "height": "430px",
+                            vid: data.VideoMeta.VideoId,
+                            playauth: data.PlayAuth,
+                            cover: data.VideoMeta.CoverURL,
+                            encryptType: 1,
+                            autoplay: false,
+                            skinLayout: [
+                                { name: "bigPlayButton", align: "cc" },
+                                {
+                                    name: "H5Loading", align: "cc"
+                                },
+                                { name: "errorDisplay", align: "tlabs", x: 0, y: 0 },
+                                { name: "infoDisplay" },
+                                { name: "tooltip", align: "blabs", x: 0, y: 56 },
+                                { name: "thumbnail" },
+                                {
+                                    name: "controlBar", align: "blabs", x: 0, y: 0,
+                                    children: [
+                                        { name: "progress", align: "blabs", x: 0, y: 44 },
+                                        { name: "playButton", align: "tl", x: 15, y: 12 },
+                                        { name: "timeDisplay", align: "tl", x: 10, y: 7 },
+                                        { name: "fullScreenButton", align: "tr", x: 10, y: 12 },
+                                        { name: "subtitle", align: "tr", x: 15, y: 12 },
+                                        { name: "setting", align: "tr", x: 15, y: 12 },
+                                        { name: "volume", align: "tr", x: 5, y: 10 }
+                                    ]
+                                }
+                            ]
+                        });
+                    }
+                }
+            }.bind(this);
+            xhr.open('GET', url);
+            xhr.send();
+        }
+        var myShare = {
+            title: $('input[name="share.title"]').val(),
+            pic: $('input[name="share.pic"]').val(),
+            url: $('input[name="share.url"]').val(),
+            qrcode: $('input[name="share.qrcode"]').val()
+        };
+
+        $('.icon-wechat').on('click', function () {
+            helper.wechatShare(myShare.qrcode);
+            $(".qrcode").html('');
+            jQuery('.qrcode').qrcode({ width: 158, height: 158, text: myShare.url });
+        });
+
+        $('.icon-qq').on('click', function () {
+            var title = '推荐一门好课：' + myShare.title + '，快来和我一起学习吧！';
+            helper.qqShare(title, myShare.url, myShare.pic);
+        });
+
+        $('.icon-weibo').on('click', function () {
+            var title = '推荐一门好课：' + myShare.title + '，快来和我一起学习吧！';
+            helper.weiboShare(title, myShare.url, myShare.pic);
+        });
+
+    });
+</script>
+{/block}

@@ -1,0 +1,86 @@
+<div class="goumai-chuangkou">
+    <div class="tip-content step1" style="background-color: rgb(0, 159, 168);"><fieldset class="layui-elem-field layui-field-title">
+        <legend>购买/激活</legend>
+    </fieldset>
+    <div class="kemutitle layui-clear wjh">
+        <div class="selectpay" style="min-width: 500px;overflow-y: auto;">
+            <div class="left-goumai">
+                <p class="bg-goumai"></p>
+                <div class="title">
+                    <h2>购买</h2>
+                    <p>没有光盘码或激活码</p>
+                </div>
+            </div>
+            <div class="right-jihuo toUrl" data="{:Url('myvip/jihuo')}">
+                <p class="bg-jihuo"></p>
+                <div class="title">
+                    <h2>激活</h2>
+                    <p>有光盘码或激活码</p>
+                </div>
+            </div>
+        </div>
+        <div class="zhifu-tips">支付马上复习，考试更有把握！</div>
+    </div>	
+    <div class="close">关闭</div>
+    </div>
+
+</div> 
+
+
+
+
+<div class="pay-chuangkou">
+<div class="tip-content step2" style="background-color: rgb(0, 159, 168);"><fieldset class="layui-elem-field layui-field-title">
+    <legend>购买/激活</legend>
+</fieldset>
+<div class="kemutitle layui-clear"><div class="selectpay-way">
+    <input type="hidden" id="itemid" value="0">
+    <input type="hidden" id="price" value="0">
+    <div class="kemutitle zhifubao-left">
+        <a class="toPay" data-type="zhifubao"><div class="pay-zhifubao"></div><p>支付宝</p></a> 
+    </div>  
+    <div class="kemutitle weixin-right">
+        <a class="toPay" data-type="weixin"><div class="pay-weixin"></div><p>微信</p></a>
+    </div>
+</div></div>	
+<div class="close">关闭</div>
+</div>
+</div>
+
+		<!--遮罩-->
+		<div class="tjbj-chuangkou">
+			<div class="tip-content">
+		        <fieldset class="layui-elem-field layui-field-title">
+			        <legend>添加笔记</legend>
+			    </fieldset>
+	        	<div class="kemutitle layui-clear">
+	        		<div class="tjbi-content">
+	        			<textarea class="form-right" rows="10" id="biji-text" placeholder="内容"></textarea>
+                    </div>
+                    <div class="from-button"><button id="biji-tijiao" class="layui-btn layui-btn-fluid" style="background-color: rgb(0, 159, 168);">提交</button></div>
+	        	</div>	
+	        	<div class="close">关闭</div>
+		    </div> 
+
+		</div> 
+		<div class="jiucuo-chuangkou">
+            <div class="tip-content">
+		        <fieldset class="layui-elem-field layui-field-title">
+			        <legend>添加纠错</legend>
+			    </fieldset>
+	        	<div class="kemutitle layui-clear">
+	        		<div class="tjjc-content">
+	        			<textarea class="form-right" rows="10" id="jiucuo-text" placeholder="内容"></textarea>
+                    </div>
+                    <div class="from-button"><button id="jiucuo-tijiao" class="layui-btn layui-btn-fluid" style="background-color: rgb(0, 159, 168);">提交</button></div>
+	        	</div>	
+	        	<div class="close">关闭</div>
+		    </div> 
+		</div> 	
+<script>
+    var _jh={if $isopenc}1{else}0{/if};
+    var _selectPro="{:Url('auth_api/membershipLists')}";
+    var _userlogin="{:Url('index/user_login')}";
+    var _create_order="{:Url('pay/create_order',array('cateid'=>$id))}";
+    var _create_success="{:Url('pay/index')}";
+</script>

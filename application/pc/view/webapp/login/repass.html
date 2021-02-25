@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	{include  file="public/head"}
+	<title>登录/注册</title>
+	<style>
+
+.main{min-width:1140px;width:1140px;margin:0 auto;font-size:16px;}
+.layui-elem-field div.layui-field-box{background:#fafafa;padding:80px 345px;border:1px solid #D9D9D9;}
+.layui-elem-field legend{padding:30px 10px;color:#009688;font-size:25px;}
+.tipcontent{height:30px;padding-left:110px;}
+.tipcontent p{display:none;color:red;font-size:14px;}
+.layui-form-mid{margin-right:0;padding: 0px !important;}
+.zidingyi-btn{width:136px;text-align: center;}
+.btn-bg{background: #009fa8;}
+.layui-btn-fluid{width:75%;margin-top:30px;float:right;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background:#009fa8}
+form div:first-child{margin-bottom:30px;}
+.layui-layer{top:10px !important;}
+
+/*validatemobile.php 用到的基本样式在上面*/
+form div.validate-form-item:first-child{margin-bottom:15px;}/*重新定义*/
+.sethidden{display: none;}
+
+
+.xieyi{padding:0 60px;}
+
+.layui-colla-title{font-size:17px;}
+.border-none{border:0;}
+.layui-colla-item p{cursor:pointer;}
+.return-pre{color:#009fa8;margin-top:30px;font-size:22px;font-weight:500;cursor: pointer;}
+.return-pre i{font-size:25px;padding-right:10px;}
+.select-overflow{margin-top: 10px;}
+.layui-elem-field legend{padding:15px 10px;}
+
+	</style>
+</head>
+<body>	
+	<div class="main">
+		<div class="return-pre" onclick="javascript:history.go(-1);"><i class="layui-icon layui-icon-return"></i>返回</div>
+		<fieldset class="layui-elem-field layui-field-title">
+		    <legend>找回密码  - step 1</legend>
+		    <div class="layui-field-box">
+		       <form id='login-form' class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label">手机号码</label>
+						<div class="layui-input-block">
+					        <input id="account" type="text" name="title" class="layui-input" lay-verify="required" maxlength="11" placeholder="请输入手机号码">	
+					    </div>
+					</div>
+					<div class="layui-form-item" id="identify">
+						<label class="layui-form-label">验&nbsp;证&nbsp;&nbsp;码</label>	
+						<div class="layui-input-inline">
+					      	<input id="identifyCode" type="text" class="layui-input" lay-verify="required" placeholder="请输入验证码">
+					    </div>
+					    <div class="layui-form-mid layui-word-aux">
+					    	<button id="validateButton" class="layui-btn layui-btn-disabled zidingyi-btn">免费获取验证码</button>
+					    </div>		
+					</div>									
+					<div class="tipcontent">
+						<p id="phonetipOne">请输入正确格式的手机号码！</p>
+						<p id="phonetipTwo">该号码还未注册，请先注册！</p>
+					</div>	
+				</form>
+				<div class="layui-clear">
+					<a href="javascript:void(0);"><button id='login' class="layui-btn layui-btn-fluid">下一步</button></a>
+				</div>
+			</div> 
+		</fieldset>
+	</div>
+</body>
+</html>

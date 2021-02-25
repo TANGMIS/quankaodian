@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+<title>快点题库</title>
+<link href="{__WAP_PATH}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{__WAP_PATH}/css/add.css" rel="stylesheet" type="text/css" />
+<link href="{__WAP_PATH}/css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.7/css/layui.css" type="text/css" media="all" />
+<script type="text/javascript" src="https://www.layuicdn.com/layui-v2.5.7/layui.js"></script>
+<style>
+.trt{width: 100%;box-shadow: 0 0 10px 8px rgba(0,0,0,.1);}
+.subBox{padding: 44px 20px 54px;}
+  .trt .subBox span{
+    white-space: nowrap;
+    display: inline-block;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 9px;
+    line-height: 44px;
+    font-size: 16px;
+    color: #494949;
+    box-sizing: border-box;
+    letter-spacing: 1.1px;
+    font-weight: 500;
+    }
+</style>
+</head>
+
+<body>
+<div class="box">
+    <script type="text/javascript" src="{__WAP_PATH}/js/jquery-1.7.js"></script>
+
+  <script>
+	$(function(){
+	$("#dropdown span").click(function(){
+		var div = $("#dropdown div");
+		if(div.css("display")=="none"){
+			div.slideDown("fast");
+		}else{
+			div.slideUp("fast");
+		} 
+	});
+	$("#dropdown div p a").click(function(){
+		var txt = $(this).text();
+		$("#change").html(txt);
+		var value = $(this).attr("rel");
+		$("#dropdown div").hide();
+		$("#search_type").val(value);
+	});
+});
+</script>
+  <div class="sub_header">
+    <div class="sub_top">
+      <div class="sub_topnav">
+         <div class="sub_topleft">
+           <ul>
+           
+             <li><a href="{:Url('tindex/index')}" class="sub_toplink02"><img src="{__WAP_PATH}/img/sub_icon02.png" class="sub_icon01"/> 在线PC题库系统</a></li>
+            
+           </ul>
+         </div>
+         <div class="sub_topright">
+          <ul>
+  
+			            <li><a href="/pc/login/index/spread_uid/0.html" id='zhuce' class="sub_toplink zhuce">免费注册</a></li>
+            <li><a href="/pc/login/index/spread_uid/0.html" id='denglu' class="sub_toplink denglu">登录</a></li>
+			           </ul>
+        </div>
+         <div style="clear:both;"></div>
+       </div>
+    </div>
+
+<div class="about_banner" >
+      <div style="padding-top:180px; text-align: center;height: 100%; background-color: #112e31; opacity: .45; line-height: 350px;">
+      <img src="{__WAP_PATH}/img/Group-1.png" width="690px">
+    </div>
+  </div>
+
+  <div class="layui-container" style="margin-top: 10px;">
+  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>课程中心</legend>
+  </fieldset>
+
+<div class="trt">
+<div class="subBox">
+<span >正高卫生职称</span>
+<span >副高卫生职称</span>
+<span >中级卫生职称</span>
+<span >初级卫生职称</span>
+<span >执业护士</span>
+<span >执业医师</span>
+<span >执业药师</span>
+<span >执业兽医</span>
+<span >健康管理师</span>
+<span >住院医师规培</span>
+<span >住院医师招录</span>
+<span >医学三基</span>
+<span >医师定期考核</span>
+<span >卫生系统招聘</span>
+<span >医用设备考评</span>
+<span >卫生事业招聘</span>
+<span >卫生人才评价</span>
+<span >药学职称考试</span>
+</div>
+<div class="subBox">
+<span>硕士研究生</span>
+<span >医学学历类</span>
+<span >中医药适宜技术</span>
+<span >建筑工程</span>
+<span >消防工程</span>
+<span >财会类</span>
+<span >经济类</span>
+<span >事业单位招聘</span>
+<span >保险</span>
+<span >教师考试</span>
+<span >警法考试</span>
+<span >司法考试</span>
+<span >社会工作者</span>
+<span >成人教育</span>
+<span >国家公务员</span>
+<span >心理咨询师</span>
+<span >金融类</span>
+<span >出版资格</span>
+<span >药学职业技能</span>
+<span >国家招聘</span>
+<span >人力资源管理师</span>
+</div>
+<div  style="clear: both;"></div>
+</div>
+</div>
+
+   <div class="app_gn">
+    <p class="app_gntit"><img src="{__WAP_PATH}/img/app_tit01.jpg"/></p>
+    <div class="app_gncon">
+      <div class="app_gncon_left">
+        <div class="huoche"></div>
+          <div class="qiche"></div>
+          <div class="bashi"></div>
+          <div class="hongche"></div>
+        <img src="{__WAP_PATH}/img/app_pic02.jpg"/>
+      </div>
+      <div class="app_gncon_right">
+        <ul>
+          <li>
+          <img src="{__WAP_PATH}/img/app_icon01.jpg"  class="app_icon" />
+           <div class="app_gnno">
+             <p class="app_gnno01">直击考试考点</p>
+             <p class="app_gnno02">紧扣最新考试大纲，重点练习，助力应试</p>
+           </div>
+          </li>
+          <li>
+          <img src="{__WAP_PATH}/img/app_icon02.jpg"  class="app_icon" />
+           <div class="app_gnno">
+             <p class="app_gnno01">精华题库</p>
+             <p class="app_gnno02">全面覆盖主要科目常考知识点，重点，难点一一练习</p>
+           </div>
+          </li>
+          <li>
+          <img src="{__WAP_PATH}/img/app_icon03.jpg"  class="app_icon" />
+           <div class="app_gnno">
+             <p class="app_gnno01">考点解析</p>
+             <p class="app_gnno02">近百位三甲医院主任、副主任编辑解题</p>
+           </div>
+          </li>
+          <li>
+          <img src="{__WAP_PATH}/img/app_icon04.jpg"  class="app_icon" />
+           <div class="app_gnno">
+             <p class="app_gnno01">重点三甲医院专家</p>
+             <p class="app_gnno02">实力派专家，传授独家秘笈</p>
+           </div>
+          </li>
+          <li>
+          <img src="{__WAP_PATH}/img/app_icon05.jpg"  class="app_icon" />
+           <div class="app_gnno">
+             <p class="app_gnno01">充分利用碎片化时间</p>
+             <p class="app_gnno02">不放过一秒钟学习机会，公交、地铁随时随地坐地轻松学习</p>
+           </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <div style="clear:both;"></div>
+  <div class="about_box06">
+  <a name="link" id="link"></a>
+   <div class="about_contact">
+     <p><img src="{__WAP_PATH}/img/about_contact_tit.jpg"/></p>
+
+   </div>
+  </div>
+</div>
+<div class="right_xf_k" id='left'>
+  <div class="right_xf_con">
+    <ul>
+
+      <li><a href='javaScript:void(0)'><img alt="小图标" src="{__WAP_PATH}/img/app.gif" /></a>
+        <div class="right_ewm">
+          <p><img alt="微信扫一扫" src="{__WAP_PATH}/img/app_pic.jpg" width='93px'/></p>
+          <p>微信扫一扫</p>
+          <div class="arrow-right"></div>
+        </div>
+      </li>
+      
+    
+      <li class="right_xf_d"><a href="javascript:returnTop();" rel="nofollow" ><img alt="侧边栏返回顶部图标" src="{__WAP_PATH}/img/right_xf_icon06.png" /><br />顶部</a></li>
+    </ul>
+  </div>
+</div>
+<script src="{__WAP_PATH}/js/index.js"></script> 
+<script>
+function showAjaxUserLogin() {
+	$("#BgDiv").css({ display: "block", height: $(document).height() });
+	var yscroll = document.documentElement.scrollTop;
+	$("#ajaxUserLoginDiv").css("display", "block");
+	document.documentElement.scrollTop = 0;
+	document.body.scrollTop=0;
+}
+
+function closeAjaxUserLogin() {
+	$("#BgDiv").css("display", "none");
+	$("#ajaxUserLoginDiv").css("display", "none");
+}
+</script>
+<div id="BgDiv"></div>
+<div id="ajaxUserLoginDiv" style="display:none"></div>
+
+
+</body>
+</html>

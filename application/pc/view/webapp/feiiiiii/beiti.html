@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="{MODULE_URL}template/webapp/layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tkMn.css"/>
+		<title>模拟考场</title>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}</ul>
+<div class="fade-icon-shousuo"></div>
+</div>
+				<div class="content-right">
+					<div class="moni">
+						<div class="top-menu">
+							<div class="title">{php echo $this->PoolData["cname"]}</div>
+							<div class="jihuo-icon">{if $this->vip==1}已经激活{else}未激活{/if}</div>
+																				</div>
+						<div class="mnkc layui-clear">
+						
+							<div class="mnkc-left">
+								<div class="mnkc-ltitle">试题范围设置</div>
+								<div class="caidan-list">
+									{loop $tcatelist $k $v}
+
+									<div class="yiji">
+										<div class="caidan-yiji">{$v["cateName"]}<span class="bihe-arror"></span></div>
+										<div class="yiji-list">
+											<div class="erji">
+											<?php
+												$soncate=$tCate->GetCates($v["cateId"],$fix);
+											?>
+
+
+											{loop $soncate $sk $sv}
+											
+												<div class="candan-erji">{$sv["cateName"]}<span class="bihe-arror"></span></div>
+												<ul class="erji-list">
+												<?php
+													$sancate=$tCate->GetCates($sv["cateId"],$fix);
+												?>
+												{loop $sancate $tk $tv}
+												<li>
+													<form class="layui-form"><input type="checkbox" name="cateId" title='{$tv["cateName"]}'  value="{$tv['cateId']}" lay-skin="primary"></form>
+												</li>
+												
+												{/loop}
+											</ul>
+											
+											{/loop}
+									
+										</div>
+									</div></div>
+									{/loop}
+								</div>
+		
+			
+			
+					</div>
+					<div class="mnkc-right">
+						<div class="mnkc-ltitle">题量设置</div>
+						<div class="mytableMn">
+							<table class="layui-table">
+								<colgroup>
+									<col width="180">
+									<col width="100">
+									<col width="">
+								</colgroup>
+							   <thead>
+									<tr>
+										<th>题型</th>
+										<!--th>数量</th-->
+										<th>总题数</th>
+									</tr> 
+								</thead>
+								<tbody>
+																			<tr>
+										<td>A1型题</td>
+										<td style="display:none"><input class="table-input" type="text" value="0" data="1"></td>
+										<td><span class="tishu" data="1">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>A2型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="2"></td>
+										<td><span class="tishu" data="2">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>A3型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="3"></td>
+										<td><span class="tishu" data="3">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>A4型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="4"></td>
+										<td><span class="tishu" data="4">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>X型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="6"></td>
+										<td><span class="tishu" data="6">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>B1型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="7"></td>
+										<td><span class="tishu" data="7">0</span>题</td>
+									</tr>
+																			<tr>
+										<td >简答题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="12"></td>
+										<td><span class="tishu" data="12">0</span>题</td>
+									</tr>
+																			<tr>
+										<td>案例题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="14"></td>
+										<td><span class="tishu" data="14">0</span>题</td>
+									</tr>
+																		</tbody>
+							</table>
+							<button class="layui-btn layui-btn-radius startTest">创建计划</button>
+						</div>
+					</div>
+					<div class="mnkc-rightr">
+						<div class="mnkc-ltitle">创建的计划</div>
+						<div class="caidan-list">
+							<div class="yiji jhcd">
+							{loop $ldata $k $v}
+								<div style="border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+									{$v["title"]}第{$v["typeno"]}次：{$v["creattime"]}
+									<span class="zuoti-icon" data-id="{$v['id']}" data-typeno="{$v['typeno']}" data-isstart="{$v['isstart']}">开始做题</span>
+									<span class="zuoti-icon-del" data="{$v['id']}">删除</span>
+								</div>
+							
+							{/loop}
+						</div>
+						</div>
+					</div>
+					<p class="fade-icon-zhankai"></p>
+				</div>
+			</div>
+
+
+
+		<!--遮罩-->
+		<div class="goumai-chuangkou">
+			<div class="tip-content">
+				
+			</div> 
+		</div> 		
+		<div class="kstk-dati">
+			<div class="ksdt-timu">
+			</div>
+		</div>
+			<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div>		</div>
+		</div>
+
+<!--考试页面-->
+		<div class="exam-chuangkou">
+			
+		</div>	
+		<!--购买提示遮罩-->
+		<div class="mn-chuangkou">
+			<div class="mn-buyContent">
+			    <p class="p1">您当前是试用版</p>
+			    <p class="p2">此功能需要您付费后使用</p>
+			    <p class="p3">考点全&emsp;考点准</p>
+			    <p class="p3">题库&nbsp;+&nbsp;视频&nbsp;+&nbsp;押题&nbsp;+&nbsp;圈题</p>
+			    <p class="p4">现在备考过关更有保障</p>
+			    <div class="layui-clear buttonparent">
+			        <p class="pbutton1"><button class="layui-btn layui-btn-radius layui-btn-normal">去购买</button></p>
+			        <p class="pbutton2"><button class="layui-btn layui-btn-radius layui-btn-normal">取消</button></p>
+			    </div>
+			</div>
+		</div>
+		{php include $this->template('goumai')}
+		<script>
+		var _cateid={php echo $this->cateid};
+		var _myFontSize = "22px";
+		var _qxh = "0";
+		var _tsBuy = "0";
+
+		var _cur = 'beiti';//控制左侧选中菜单this
+		_treeList="{php echo $this->createMobileUrl('zjlist',array('cateid'=>$this->cateid))}";
+		var _getQueTypeNums = "{php echo $this->createMobileUrl('getquetypenums',array('cateid'=>$this->cateid))}";
+		var _mnkc="{php echo $this->createMobileUrl('mnkc',array('cateid'=>$this->cateid))}";
+		var _deljh="{php echo $this->createMobileUrl('deljh',array('cateid'=>$this->cateid))}";
+		var _gettque="{php echo $this->createMobileUrl('GetLXtque',array('cateid'=>$this->cateid))}";
+		</script>
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/layui/layui.js" charset="UTF-8"></script>
+<script src="{MODULE_URL}template/webapp/js/tkMn.js"></script>
+
+	</body>
+</html>

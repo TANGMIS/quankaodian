@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tk.css"/>
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery.qrcode.min.js"></script>
+		<title>支付</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+
+<style>
+	/* 微信支付二维码 */
+.p-w-bd, .pay-weixin{zoom: 1; padding-left: 100px; font: 13px/150% Arial,Verdana,"\5b8b\4f53";}
+.p-w-hd{margin-bottom: 20px; font-size: 18px; font-family: "Microsoft Yahei";}
+.p-w-bd{padding-left: 130px; margin-bottom: 30px;}
+.font-red{color: #e31613;}
+.p-w-box{float: left; width: 300px;}
+.pw-box-hd{margin-bottom: 20px; border: 1px solid #ddd; width: 298px; height: 298px;}
+.pw-box-ft{height: 44px; padding: 8px 0 8px 125px; background: #ff7674 url('{MODULE_URL}template/webapp/img/pc_pay_wechat_icon.png') 50px 8px no-repeat;}
+.pw-box-ft p{margin: 0; font-size: 14px; line-height: 22px; color: #fff; font-weight: 700;}
+.pw-box-ft p{margin: 0; font-size: 14px; line-height: 22px; color: #fff; font-weight: 700;}
+.p-w-sidebar{float: left; width: 379px; height: 421px; padding-left: 50px; margin-top: -20px; background: url('{MODULE_URL}template/webapp/img/pc_pay_wechat_bg.png') 50px 0 no-repeat;}
+</style>
+
+<div class="w-all w-minw bg-c-fcfcfc ovhidden">
+    <div class="w-main m-auto"> 
+        <div class="w-1200 bg-c-ffffff fl" style="width: 1200px; margin: 0px auto; padding-top: 50px;">
+            <div class="payContent flex flex-v">
+				{if $paytype=='wechat'}
+				<div class="pay-weixin">
+					<div class="p-w-hd">微信支付</div>
+					<div class="p-w-bd">
+						<div class="wechatInfo" style="top:-36px;left:130px;font-size:20px">距离二维码过期还剩<span class="font-red">60</span>秒，过期后请刷新页面重新获取二维码。
+							<div style="font-size:30px;color:red;height:50px;line-height: 50px;">金额：￥{$setdata["vip_money"]}</div></div>
+					
+						<div class="p-w-box">
+							<div class="pw-box-hd" id="wechatPayImage">
+							</div>
+							<div class="pw-box-ft">
+								<p>请使用微信扫一扫</p>
+								<p>扫描二维码支付</p>
+							</div>
+						</div>
+						<div class="p-w-sidebar"></div>
+					</div>
+				</div>
+				<script type="text/javascript">
+				var saveorderLog="{php echo $this->createMobileUrl('getorderLog')}";
+					jQuery('#wechatPayImage').qrcode({width: 298, height: 298, text: "{$wechat_result['code_url']}"});
+					
+					var countdown = 59;
+					setInterval(function() {
+						if(countdown>0){
+							$(".font-red").text(countdown);
+							countdown--;
+						}else{
+							$('.wechatInfo').addClass('font-red').text('二维码已过期，请刷新页面重新获取二维码。');
+							document.getElementById("wechatPayImage").innerHTML = '<img src="{MODULE_URL}template/webapp/img/expire_qrcode.png"></img>';
+							return;
+						}
+					}, 1000);
+
+					var timing = 0;
+					var jump_url = '';
+					function pay_status(){
+						if(timing >= 65){
+							window.clearInterval(pay_status_int);
+							return;
+						}
+						timing += 3;
+
+						var ordersn = "{$ordersn}";
+						
+						$.ajax({
+							type: "post",
+							url: saveorderLog,
+							dataType: "json",
+							data: {ordersn:ordersn},
+							success:function(res){
+								console.log(res);
+								var fd=res.data;
+								if(res.errno==0 && fd.orderstatus>0){
+									jump_url = fd.url;
+									layer.msg('恭喜您，您的订单已支付成功！准备跳转中！请勿关闭',{
+	        		  					  time:1000
+	        	    				});
+				
+									window.clearInterval(pay_status_int);
+									if(jump_url){
+										window.location.href = jump_url;
+									}
+									return;
+								}
+							}, 
+							error:function(){   
+							},   
+						});
+					}
+					var pay_status_int = self.setInterval(function(){pay_status()},3000);
+
+		
+				</script>
+				{/if}
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="loadingToast" class="dsbnone">
+	<div class="loading-mask_white"></div>
+	<div class="loadEffect">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+
+
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/js/tk.js"></script>
+
+	</body>
+</html>

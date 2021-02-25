@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>题库</title>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+<div class="content-left">
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+{include  file="tleft"}
+</ul>
+</div>
+<div class="content-right">
+	<div class="tiku" style="display: block;">
+		<div class="top-menu sp-bbottom">
+			<div class="title">{$item.cname}</div>
+			<div class="jihuo-icon">{if $isopenc==1}已激活{else}未激活{/if}</div>
+		
+	
+				
+		
+		</div>
+		<div class="kszn layui-clear">
+
+			<div   style="margin-right: 0; overflow-y: auto; height: 600px;">
+	
+				<div class="layui-elem-quote">
+					<p>关于押题</p>
+					<br>
+					<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;押纲点题试卷由专业医考专家团队根据本年度考试大纲或目标考点，参考历年考试真题严选精编而成，与真实考卷考点较为吻合，与真实考卷题型非常相似。押纲点题试卷的做题过程全真模仿了国家专业人机对话考试环境，学员通过对押纲点题试卷的反复练习，能持续积累考试经验，掌握考试重点，习惯考场环境，为有效通过相关考试奠定扎实基础。</p>
+				  </div>
+				<div class="caidan-list shiti ">
+					<div class="caidan-yiji">名师押题<span class="zhankai-arror"></span></div>
+					<ul class="hide-ul">
+						{volist name="yati" id="vo"}
+						<div class="yt-list">
+							<span class="list-title">{$vo.cateName}</span><span>总题数：{$vo.nums}</span>
+							<span class="show-yt rukou-icon show-exam-xitong" data="{$vo['cateId']}">试卷入口</span>
+						</div>
+						
+						{/volist}
+					</ul>
+
+				</div>
+
+				<div class="caidan-list shiti">
+				<div class="caidan-yiji">名师密卷<span class="zhankai-arror"></span></div>
+				<ul class="hide-ul">
+					{volist name="quanti" id="qv"}
+					<div class="yt-list">
+						<span class="list-title">{$qv.cateName}</span><span>总题数：{$qv.nums}</span>
+						<span class="show-yt rukou-icon show-exam-xitong" data="{$qv['cateId']}">试卷入口</span>
+					</div>
+					{/volist}
+				</ul>
+				</div>
+	
+
+				  
+			</div>
+		</div>
+		<div class="kstk-dati">
+			<div class="ksdt-timu">
+			</div>
+		</div>
+	<p class="fade-icon-zhankai"></p>
+</div>
+
+</div>
+
+					<!--考试页面-->
+					<div class="exam-chuangkou">
+						<span class="exam-close-button">关闭</span>
+						<div class="tip-content"></div> 
+					</div>
+
+</div>
+		<!--遮罩-->
+		{include  file="goumai"}
+		<script>
+		var _cateid={$id};
+		var _myFontSize = "22px";
+		var _qxh = "0";
+		var _cur = 'yati';//控制左侧选中菜单this
+		var _shiyong=0;
+		var _zid=0;
+		var _ytExam="{:Url('yttexamtemplate',array('cateid'=>$id))}";
+		_shouCang="{:Url('userfav',array('cateid'=>$id))}";
+		_saveNote="{:Url('usebiji',array('cateid'=>$id))}";
+		_Jiucuo="{:Url('usejiucuo',array('cateid'=>$id))}";
+		_saveYtLog ="{:Url('usercuoti',array('cateid'=>$id))}";
+		</script>
+
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}/js/tk.js"></script>
+<script src="{__WAP_PATH}js/yt.js"></script>
+<script>
+	layui.use(['jquery', 'layer' ,'element','form'], function(){
+    var $ = layui.$ //重点处
+    ,layer = layui.layer
+    ,element = layui.element
+    ,form = layui.form;
+    
+
+
+
+	    //二级菜单交互
+		$(".caidan-yiji").click(function(){
+    	var _thisspan = $(this).parent().find("span");
+    	var _thisul = $(this).parent().find("ul")
+    	if(_thisul.hasClass("hide-ul")){
+    		_thisul.removeClass("hide-ul");
+    	}else{
+    		_thisul.addClass("hide-ul");
+    	}
+    	if(_thisspan.hasClass("zhankai-arror")){
+    		_thisspan.removeClass("zhankai-arror").addClass("bihe-arror");
+    		
+    	}else{
+    		_thisspan.removeClass("bihe-arror").addClass("zhankai-arror");
+    	}
+    })
+    $(".caidan-list li").click(function(){
+    	$(".left-caidan").find("li").removeClass("this-cdshow");
+    	$(this).addClass("this-cdshow");
+	})
+	$('.caidan-list li').click(function(){
+		var cateid = $(this).attr('data'); 
+		treeList(cateid);
+	}); 
+	})
+</script>
+	</body>
+</html>

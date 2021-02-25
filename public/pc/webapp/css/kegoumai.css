@@ -1,0 +1,61 @@
+  /*遮罩购买*/
+  .layui-field-title{margin:0 0 5px 0;}
+  .layui-elem-field legend{color:#fff;}
+  .goumai-chuangkou{display:none;background: rgba(0,0,0,0.3);height:100%;width:100%;position:fixed;top:0;left:0;}
+  .tip-content{display:table;margin:0 auto;margin-top:150px;padding-top:10px;background:#009EA7;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+  .tip-content h2{text-align: center;padding-bottom:10px;}
+  .kemutitle-pro p.kemu-biaozhi-pro{background: #E2EAED;font-size:14px;color:#6c6c6c;padding:5px 10px;width:48px;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+  .kemu-tip-pro{color:#6c6c6c;}
+  .kemutitle-pro{position:relative;font-size:16px;padding-left:20px;background: #fff;}
+  .goumai-chuangkou hr{margin-bottom:0}
+  .kemutitle-pro p{padding:8px 0;}
+  .kumu-buy-pro{position:absolute;right:20px;bottom:10px;}
+  .kumu-buy-pro span{display: inline-block;padding:5px;}
+  .kumu-buy-pro span.danjia-pro{color:red;}
+  .kumu-buy-pro span.shiyong-pro,.kumu-buy-pro span.liji-goumai-pro{font-size:14px;cursor:pointer;background:#009EA7;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+  .close-pro{text-align: center;color:#fff;cursor: pointer;font-size:16px;padding:10px 0;/*background: #fff;*/-webkit-border-bottom-right-radius:10px;-moz-border-bottom-right-radius:10px;border-bottom-right-radius:10px;
+  -webkit-border-bottom-left-radius:10px;-moz-border-bottom-left-radius:10px;border-bottom-left-radius:10px;}
+  .layui-field-title .layui-field-box{padding:0;}
+  .selectpro{height:400px;width:500px;overflow-y: auto;}
+  .selectpay{padding:20px 30px;overflow: hidden;}
+  .zhifu-tips{text-align: center;padding-bottom: 20px;font-size: 18px;color: red;}
+  /*提交笔记和纠错*/
+  .jiucuo-chuangkou form.layui-form{padding:20px 30px;}
+  /*支付方式*/
+  .selectpay-way{padding:20px 30px 0 30px;overflow: hidden;}
+  .selectpay-way .zhifubao-left{float:left;padding:0 30px;}
+  .selectpay-way .weixin-right{float:right;padding:0 30px;}
+  .selectpay-way .pay-zhifubao{width:120px;height:120px;background: url("../img/zhifubao.png")}
+  .selectpay-way .pay-weixin{width:120px;height:120px;background: url("../img/weixin.png")}
+  .selectpay-way a p{text-align: center;line-height:40px;}
+  *遮罩jihuo*//*遮罩添加笔记*/
+  .layui-elem-field legend{color:#fff;}
+  .goumai-chuangkou,.tjbj-chuangkou,.jiucuo-chuangkou,.pay-chuangkou,.sp-chuangkou{display:none;background: rgba(0,0,0,0.3);height:100%;width:100%;position:fixed;top:0;left:0;z-index: 10000001;}
+  .tjbj-chuangkou .tip-content{width:540px;margin:0 auto;margin-top:150px;padding-top:10px;background:#009EA7;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;
+  -webkit-box-shadow: 1px 2px 2px #BABABA;-moz-box-shadow:1px 2px 2px #BABABA;box-shadow: 1px 2px 2px #BABABA;}
+  .kemutitle{font-size:16px;background: #fff;}
+  .kemutitle div.left-goumai,.kemutitle div.right-jihuo{width:275px;height:120px;background: #ecf5f6;border:1px solid #ccc;cursor: pointer;}
+  .kemutitle div.left-goumai{float:left;padding:17px 18px;-moz-box-sizing:border-box;box-sizing: border-box;}
+  .kemutitle div p.bg-goumai{float:left;width:85px;height:85px;background: url("../img/icons.png") -156px -257px no-repeat;}
+  .kemutitle div.title{float:left;padding-top:15px;margin-left:5px} 
+  .kemutitle div.title p{color:#6c6c6c;}
+  .kemutitle div p.bg-jihuo{float:left;width:85px;height:85px;background: url("../img/icons.png") -241px -257px no-repeat;}
+  .kemutitle div.right-jihuo{float:right;padding:17px 18px;margin-left:30px;-moz-box-sizing:border-box;box-sizing: border-box;}
+  .close{text-align: center;color:#009EA7;cursor: pointer;font-size:16px;padding:10px 0;background: #fff;border-top:1px solid #ccc;-webkit-border-bottom-right-radius:10px;-moz-border-bottom-right-radius:10px;border-bottom-right-radius:10px;
+  -webkit-border-bottom-left-radius:10px;-moz-border-bottom-left-radius:10px;border-bottom-left-radius:10px;}
+  /*笔记*/
+  .tjbi-content{padding:10px;}
+  .tjbi-content textarea{margin:10px 25px;width:488px;}
+  .layui-btn{background:#009EA7;}
+  /*纠错*/
+  .layui-form-checkbox[lay-skin=primary]:hover i{border-color:#009EA7}
+  .layui-form-checked[lay-skin=primary] i{background-color:#009EA7}
+  .layui-form .form-left{display:inline-block;width:232px}
+  .layui-form textarea.form-right{display:inline-block;width:390px}
+  .layui-form-checkbox[lay-skin=primary]{height:30px !important;}
+  .tjjc-content{padding:10px;}
+  .tjjc-content textarea{margin:10px 25px;width:488px;}
+  .layui-btn{background:#009EA7;}
+  .sttk-main .layui-form-checkbox[lay-skin=primary]{display: block;padding:15px 0;height: auto!important;}
+  .sttk-main .layui-form-checkbox[lay-skin=primary] i{float:left;position:static;margin-top:5px;}
+  .sttk-main .layui-form-checkbox[lay-skin=primary] span{float:none;font-size:17px;line-height:30px;}

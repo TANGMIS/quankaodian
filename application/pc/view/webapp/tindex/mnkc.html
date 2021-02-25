@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>模拟考场</title>
+		<style>
+			.lda{border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+			.cjjh{border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+		</style>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include file='ttopnav'}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">{include file='tleft'}</ul>
+					<div class="fade-icon-shousuo"></div>
+				</div>
+				<div class="content-right">
+					<div class="moni">
+						<div class="top-menu"><div class="title">{$item["cname"]}</div></div>
+						<div class="mnkc layui-clear">
+							<div class="mnkc-left">
+								<div class="mnkc-ltitle">试题范围设置</div>
+								<div class="caidan-list">
+									<form class="layui-form">
+									{volist name="data" id="vo"}
+									<div class="yiji">
+										<div class="caidan-yiji">{$vo["cateName"]}<span class="bihe-arror"></span></div>
+										<div class="yiji-list">
+											<div class="erji">
+											{volist name="$vo.son" id="tvo"}
+												<div class="candan-erji">{$tvo["cateName"]}<span class="bihe-arror"></span></div>
+												<ul class="erji-list">
+													{volist name="$tvo.son" id="trv"}
+													<li><input type="checkbox" name="cateId" title='{$trv["cateName"]}'  value="{$trv['cateId']}" lay-skin="primary"></li>
+													{/volist}
+												</ul>
+											{/volist}
+									
+										</div>
+									</div></div>
+									{/volist}
+								</form>
+								</div>
+		
+			
+			
+					</div>
+					<div class="mnkc-right">
+						<div class="mnkc-ltitle">题量设置</div>
+						<div class="mytableMn">
+							<table class="layui-table">
+								<colgroup>
+									<col width="180">
+									<col width="100">
+									<col width="">
+								</colgroup>
+							   <thead>
+									<tr>
+										<th>题型</th>
+										<!--th>数量</th-->
+										<th>总题数</th>
+										<th></th>
+									</tr> 
+								</thead>
+								<tbody>
+									<tr>
+										<td>试卷分数</td>
+										<td ><input class="table-input" type="text" id="fen" value="150" data="1" style="border: 1px solid #ccc;"></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>考试时间</td>
+										<td ><input class="table-input" type="text" id="times" value="120" data="2" style="border: 1px solid #ccc;"></td>
+										<td>分钟</td>
+									</tr>
+
+								</tbody>
+							</table>
+							<button class="layui-btn layui-btn-radius mnkcstart">开始考试</button>
+							<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+								<legend>介绍</legend>
+								严格正规的考试环境，让您无限次的自动组卷。通过反复的考试练习，让您了解自己真实水平。
+							  </fieldset>
+						</div>
+		
+						  
+					</div>
+	
+					<p class="fade-icon-zhankai"></p>
+				</div>
+			</div>
+
+
+
+		<!--遮罩-->
+		<div class="goumai-chuangkou">
+			<div class="tip-content">
+				
+			</div> 
+		</div> 		
+
+</div>
+</div>
+
+					<!--考试页面-->
+					<div class="exam-chuangkou">
+						<span class="exam-close-button">关闭</span>
+						<div class="tip-content"></div> 
+					</div>
+
+		{include file='goumai'}
+		<script>
+		var _cateid={$cateid};
+
+
+		_examLog = '';
+		var _cur = 'beiti';//控制左侧选中菜单this
+		_treeList="{:Url('zjlist',array('cateid'=>$cateid))}";
+		var _getQueTypeNums = "{:Url('getquetypenums',array('cateid'=>$cateid))}";
+		var _mnkc="{:Url('mnkc',array('cateid'=>$cateid))}";
+		var _mnkctque="{:Url('mnkctque',array('cateid'=>$cateid))}";
+
+		_shouCang="{:Url('userfav',array('cateid'=>$id))}";
+		_saveNote="{:Url('usebiji',array('cateid'=>$id))}";
+		_Jiucuo="{:Url('usejiucuo',array('cateid'=>$id))}";
+		_saveYtLog ="{:Url('usercuoti',array('cateid'=>$id))}";
+		</script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+<script src="{__WAP_PATH}js/tkMn.js"></script>
+<script src="{__WAP_PATH}js/tkstart.js"></script>
+<script>
+		$('.mnkcstart').click(function(){
+		//收集数据
+		var _tmp1 = $('.layui-form-checkbox');
+		var _cateId = [];
+		$.each(_tmp1,function(){
+			if($(this).hasClass('layui-form-checked')){
+				var _val = $(this).prev().val();
+				_cateId.push(_val);
+			}
+		});
+		console.log(_cateId.length);
+		if(_cateId.length==0){
+			alert('请选择试题范围题数！'); 
+			return false;
+		}
+		$(".exam-chuangkou").show();
+		$('.exam-chuangkou').html('<div style="font-size:18px;line-height:30px;text-align:center;width:100%;">题目加载中...</div>');
+		//提交数据
+		$.post(_mnkctque,{'zid':_cateId,'times':$("#times").val(),'fen':$("#fen").val()},function(resp){
+			$('.exam-chuangkou').html(resp);
+			layui.form.render();
+		}); 
+	});
+</script>
+	</body>
+</html>

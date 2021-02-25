@@ -1,0 +1,118 @@
+		<div class="exam-chuangkou" style="background-color: rgb(0, 159, 168); display: block;"><div class="eaxm-close layui-clear">
+			<button class="layui-btn layui-btn-sm exam-close-button" style="background-color: rgb(0, 159, 168);" >退出考试</button>
+		</div> 
+			<div class="exam-right">
+				<div class="right-top">
+					<span class="layui-badge layui-bg-blue">已答</span>
+					<span class="layui-badge">在答</span>
+					<span class="layui-badge layui-bg-gray">未答</span>
+				</div>
+				<div class="right-main">
+					<div class="layui-collapse">
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title" style="background-color: rgb(0, 159, 168);">单选题<i class="layui-icon layui-colla-icon"></i></h2>
+							<div class="show-timu layui-colla-content layui-show">
+								{volist name="data" id="vo" key="k"}
+								{if condition="$vo.types==0"}
+								<span class="" data-id="{$k}" data-type="{$vo.queTypeId}" data-typename="单选题">{$k}</span>
+								{/if}
+								{/volist}
+
+							</div>
+						</div>
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title" style="background-color: rgb(0, 159, 168);" data-typename="多选题">多选题<i class="layui-icon layui-colla-icon"></i></h2>
+							<div class="show-timu layui-colla-content layui-show">
+								
+								{volist name="data" id="vo" key="k"}
+								{if condition="$vo.types==1"}
+								<span class="" data-id="{$k}" data-type="{$vo.queTypeId}" data-typename="多选题">{$k}</span>
+								{/if}
+								{/volist}
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="exam-left">
+				<div class="left-top">
+					<p>
+						<span>当前试室：第一试室</span>
+						<span>当前场次：第01场</span>
+						<span>座位号:01</span>
+					</p>
+					<p>
+						<span>姓名：测试001</span>
+						<span>性别：男</span>
+						<span>准考证号：10001</span>
+						<span>考试内容：{$item["cname"]}</span>
+					</p>
+				</div>
+				<div class="left-main" style="background-color: #ffffff">
+				
+					<form class="layui-form">
+						<input type="hidden" id="tqueid" value="0">		
+						<input type="hidden" id="cateid" value="0">		
+						<input type="hidden" id="protype" value="0">									
+						{volist name="data" id="tvo" key="k"}
+				
+							<div class="sttk layer-photos-demo" id="layer-photos-demo{$k}" data-id="{$k}" {if $k>1} style="display: none;"{/if} data-queid="{$tvo.queId}">
+							<div class="sttk-main">
+					    		<div class="form-label" style="font-size: 22px;">{$tvo.queText}</div>
+					    		<div class="layui-input-block">
+					    		<input type="hidden" name="answer{$k}" value="{$tvo.answer}">
+								<textarea name="prompt{$k}" style="display: none;">{$tvo.prompt}</textarea>
+								{if condition="$tvo.types==0"}
+									{volist name="$tvo.tqueOpt" id="voo" key="ko"}
+									<input type="radio" name="radio{$k}" value="{$voo.optName}" data="{$k}" data-id="{$tvo.queId}" title="{$voo.optName}.{$voo.optText}">
+									{/volist}
+								{/if}
+								{if condition="$tvo.types==1"}
+								{volist name="$tvo.tqueOpt" id="voo" key="ko"}
+								<input type="checkbox" name="checkbox{$k}" value="{$voo.optName}" data="{$k}" data-id="{$tvo.queId}" title="{$voo.optName}.{$voo.optText}" lay-skin="primary">
+								{/volist}
+
+								<button type="button" class="sure layui-btn layui-btn-sm"  data="{$k}" data-id="{$tvo.queId}" data-cateid="{$cateid}">确认</button>
+								{/if}
+							  </div>
+								<div id="showResult{$k}" class="dats" style="display: none;">
+									<p><span style="color:#ff0000">您的答案： </span></p>
+									<p>正确答案：{$tvo.answer}</p>
+									<p>{$tvo.prompt}</p></div>
+							    <div class="yxj-icon">
+							    	<div class="right-icon">
+										<span class="biji-icon" data-queid="{$tvo.queId}" data-cateid="{$cateid}" data-protype="{$protype}">笔记</span>
+										{if $tvo.userfav}
+										<span class="shoucang-icon" data-queid="{$tvo.queId}" data-cateid="{$cateid}" data-protype="{$protype}" style="background-color:#009fa8;color:#fff">已收藏</span>
+										{else}
+										<span class="shoucang-icon" data-queid="{$tvo.queId}" data-cateid="{$cateid}" data-protype="{$protype}">收藏</span>
+										{/if}
+							    	    <span class="jiucuo-icon" data-queid="{$tvo.queId}" data-cateid="{$cateid}" data-protype="{$protype}">纠错</span>
+							    	</div>
+							    </div>
+							</div>
+						</div>
+						{/volist}
+					
+					
+						
+
+
+					
+				</form>
+				</div>
+				<div class="left-bottom">
+					<button class="layui-btn pre-timu" style="background-color: rgb(0, 159, 168);"><i class="layui-icon layui-icon-left"></i>上一题</button>
+					<button class="layui-btn next-timu" style="background-color: rgb(0, 159, 168);"><i class="layui-icon layui-icon-right"></i>下一题</button>
+					<button class="layui-btn layui-btn-sm jiaojuan" data="0" style="background-color: rgb(0, 159, 168);">交卷</button>
+					<div class="dati-tip">
+						<span>试题总数：{$datatotal}题</span>
+						<span class="ydNums">已答：0题</span>
+					</div>
+				</div>
+			</div>
+
+</div>

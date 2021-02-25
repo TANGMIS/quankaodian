@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.2/skins/default/aliplayer-min.css" />
+		<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.2/aliplayer-min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="https://player.alicdn.com/aliplayer/presentation/js/aliplayercomponents.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tk.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tkExam.css"/>
+
+
+		<title>题库首页</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}
+</ul>
+<div class="fade-icon-shousuo"></div>				</div>
+				<div class="content-right">
+					<div class="cuoti" style="display: block;">
+					
+						<div  style="display: block;">
+							<div class="top-menu">
+								<div class="title set-title">{php echo $this->PoolData["cname"]}</div>
+								<span class="icon-return">返回上一页</span>
+							</div>
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<div class="layui-elem-quote">
+									<p>视频课程</p>
+									<br>
+									<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考点透析视频课程以国家人社部、卫健委、食药监局、中医药管理局等相关考试主管部门的考试要求为依据，以历年考试考评内容为参考，以最新考试大纲、知识考点以及相关学科新进展等为核心，由国内各专业教师团队呕心授课。内容涵盖全面，纤悉无遗；考点讲解透彻，鞭辟入里；章节详略得当，重点突出。是职称晋升、资格认证的必备课程。本课程对于初次参加相关考试或是离开课本较长时间的考生来说，尤具实用性。</p>
+								  </div>
+<div class="layui-tab-content"><div class="layui-tab-item top-tip layui-show">
+			<div class="shiti liebiao">
+			{loop $data["list"] $k $v}
+			<div class="yt-list">
+				<span class="list-title">{$v["cname"]}</span>
+				<span class="show-yt rukou-icon show-exam-xitong" data="{$v['id']}">视频列表</span>
+			</div>
+			{/loop}	
+ 
+</div>
+</div>
+							</div> 
+						</div>
+						<div class="liebiao-detail spList shiti" style="display: none;">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<style>
+				.yt-list span.rukou-shipin{cursor:pointer;float:right;border:1px solid #009fa8;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;padding:5px 10px;margin-top:9px;margin-right:45px;color:#009fa8;}
+.yt-list span.rukou-shipin:hover{background:#009fa8;color:#fff;}
+.shipin-yxq{font-size:14px;float:right;color:red;padding-right:20px;}
+.sp-bbottom{border-bottom:1px solid #ccc;-webkit-box-shadow: 0px 0px 5px #BABABA;-moz-box-shadow:0px 0px 5px #BABABA;box-shadow: 0px 0px 5px #BABABA;}
+.top-menu{border-bottom:none;}
+.layui-elem-quote{margin-bottom: 0;}
+.yt-list span.rukou-shipin{cursor:pointer;float:right;border:1px solid #009fa8;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;padding:5px 10px;margin-top:9px;margin-right:45px;color:#009fa8;}
+.yt-list span.rukou-shipin:hover{background:#009fa8;color:#fff;}
+.top-menu.padding{padding:15px;}
+.top-menu.padding span{top:12px;}
+.sp-top{color:#fff;overflow: hidden;padding-bottom:5px;}
+.sp-top i{float:right;margin-right:20px;font-size:26px;cursor: pointer;width:20px;height:22px;background: url("{MODULE_URL}/images/icons.png") -276px -455px no-repeat;}
+.shi-content{background:#fff;height:200px;width:100%;height:100%;}
+.shi-body{width:825px;}
+/* 直播互动 */
+.chat_wrap{
+	background-color:#efeff4;
+}
+.chat_wrap .chat_tips{
+	padding: 60px 0;
+    font-size: 16px;
+    text-align: center;
+}
+.chat_wrap .chat_bd {
+    height: 250px;
+    box-sizing: border-box;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: flex;
+    margin: 6px 0 5px 0;
+    overflow-y: scroll;
+	padding: 0 15px;
+}
+.chat_wrap .chat_main {
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+}
+.chat_wrap .chat_main .history_message{
+	font-size: 12px;
+    text-align: center;
+    padding: 10px;
+}
+.chat_wrap .chat_bd,.chat_wrap .chat_main {
+    -webkit-box-flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+}
+.chat_wrap .chat_list, .chat_wrap .chat_self{
+    margin:0 !important;
+}
+.chat_wrap .chat_list .chat_me {
+    margin-right: 50px;
+    margin-bottom: 8px;
+}
+.chat_wrap .chat_me {
+    display: flex;
+}
+.chat_wrap .chat_flex {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.chat_wrap .chat_item p {
+    margin: 4px 0;
+    color: #a8a8ac;
+    font-size: 12px;
+}
+.chat_wrap .chat_list .chat_me p {
+    text-align: left;
+}
+.chat_wrap .chat_item p span {
+    margin-left: 9px;
+}
+.chat_wrap .chat_list .chat_me .chat_msg {
+	background: #9EEA6A;
+    color: #000;
+    float: left;
+}
+.chat_wrap .chat_item div {
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.5em;
+    border-radius: 5px;
+    display: inline-block;
+	white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.chat_form_area {
+    width: 100%;
+    background-color: #f7f7f7;
+}
+.chat_form_area .chat_form {
+	margin-right: 70px;
+    margin-left: .6rem;
+    padding: 3px 10px;
+    border: 1px solid #dcdcdc;
+    background: #FFF;
+    border-radius: 5px;
+    line-height: 2em;
+    width: 70%;
+}
+.chat_form_area .stop_chat_form {
+	margin-right: 1.2rem;
+    margin-left: .6rem;
+    padding: 3px 10px;
+    border: 1px solid #dcdcdc;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 2em;
+}
+.chat_form_area .chat_form .chat_input {
+    border: none;
+    width: 100%;
+    line-height: 2em;
+    font-size: 12px;
+}
+.chat_send {
+    width: 15%;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #06AD56;
+    color: #FFF;
+}
+.chat_wrap .chat_self .chat_me {
+    margin-left: 50px;
+    margin-bottom: 7px;
+}
+.chat_wrap .chat_self .chat_me p {
+    text-align: right;
+}
+.chat_wrap .chat_self .chat_me .chat_msg {
+	background: #fff;
+    color: #000;
+    float: right;
+}
+
+.chat_wrap .login-btn {
+	font-weight: 700;
+    font-size: 16px;
+    color: #06AD56;
+}
+
+.online_wrap{
+	width: 100%;
+    top: 0;
+    text-align: center;
+}
+.online_inner{
+    top: -6px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    z-index: 1;
+    font-size: .8rem;
+    padding: .2rem 0;
+}
+			</style>
+<div class="sp-chuangkou" style="display: none;">
+<div class="tip-content shi-body" style="background-color: rgb(0, 159, 168);">
+	<div class="sp-top">
+		<i class="close-shipin"></i>
+	</div>
+	<div class="shi-content">
+		<div class="video prism-player" id="J_prismPlayer"></div>
+	</div>
+	<div class="videolist"></div>
+<!--互动-->
+<div class="hudong">
+	<div class="js-tab chat_wrap" id="chat_wrap">
+		<div class="chat_bd" id="chat_bd" ><div class="chat_main"></div></div>
+		<div class="online_wrap">
+					<div class="online_inner">
+						当前在线：<span id="onlineNum">0</span>人
+					</div>
+		</div>
+	</div>
+	<div class="chat_form_area max-width-640">
+		<div class="chat_form">
+			<input id="chat_input" class="chat_input allow-chat" type="text" placeholder="我也来聊几句..">
+			
+		</div>
+		<button class="chat_send allow-chat" id="chat_send">发送</button>
+	</div>
+</div>
+	<!--互动-->
+</div>
+</div>
+<style>
+	.videolist{overflow-y:scroll; }
+	.prism-player .prism-big-play-btn{left: 50% !important;bottom: 50% !important;margin-left: -32px;margin-bottom: -32px;}
+</style>
+
+		<!--考试页面-->
+	
+<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div></div>
+			<script>
+				var _shiyong=0;
+				var _liveStartTime,_liveOverTime;
+				var nickname='{php echo $nickname}';
+				var _cateid={php echo $this->cateid};
+				var _cur = 'videos';//控制左侧选中菜单this
+				var _getSpList="{php echo $this->createMobileUrl('GetspList',array('cateid'=>$this->cateid))}";
+				var _spVodUrl="{php echo $this->createMobileUrl('spVodUrl',array('cateid'=>$this->cateid))}";
+				var _SpUrl="{php echo $this->createMobileUrl('SpUrl',array('cateid'=>$this->cateid))}";
+				var _Aodianyunim="{php echo $this->createMobileUrl('Aodianim',array('cateid'=>$this->cateid))}";
+				</script>
+		<!--遮罩-->
+		{php include $this->template('goumai')}
+
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/js/sp.js"></script>
+<script src="{MODULE_URL}style/aodianyunIM/tis-1.1.js"></script>
+<script src="{MODULE_URL}style/aodianyunIM/tis-api-1.1.js"></script>
+	</body>
+</html>

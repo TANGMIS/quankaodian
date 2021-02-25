@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head" /}
+		<title>模拟考场</title>
+		<style>
+			.lda{border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+			.cjjh{border-bottom:1px solid #ccc;padding:10px 30px;font-size:16px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+		</style>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include file='ttopnav'}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">{include file='tleft'}</ul>
+					<div class="fade-icon-shousuo"></div>
+				</div>
+				<div class="content-right">
+					<div class="moni">
+						<div class="top-menu"><div class="title">{$item["cname"]}</div></div>
+						<div class="mnkc layui-clear">
+							<div class="mnkc-left">
+								<div class="mnkc-ltitle">试题范围设置</div>
+								<div class="caidan-list">
+									<form class="layui-form">
+									{volist name="data" id="vo"}
+									<div class="yiji">
+										<div class="caidan-yiji">{$vo["cateName"]}<span class="bihe-arror"></span></div>
+										<div class="yiji-list">
+											<div class="erji">
+											{volist name="$vo.son" id="tvo"}
+												<div class="candan-erji">{$tvo["cateName"]}<span class="bihe-arror"></span></div>
+												<ul class="erji-list">
+													{volist name="$tvo.son" id="trv"}
+													<li><input type="checkbox" name="cateId" title='{$trv["cateName"]}'  value="{$trv['cateId']}" lay-skin="primary"></li>
+													{/volist}
+												</ul>
+											{/volist}
+									
+										</div>
+									</div></div>
+									{/volist}
+								</form>
+								</div>
+		
+			
+			
+					</div>
+					<div class="mnkc-right">
+						<div class="mnkc-ltitle">题量设置</div>
+						<div class="mytableMn">
+							<table class="layui-table">
+								<colgroup>
+									<col width="180">
+									<col width="100">
+									<col width="">
+								</colgroup>
+							   <thead>
+									<tr>
+										<th>题型</th>
+										<!--th>数量</th-->
+										<th>总题数</th>
+									</tr> 
+								</thead>
+								<tbody>
+									<tr>
+										<td>A1型题</td>
+										<td style="display:none"><input class="table-input" type="text" value="0" data="1"></td>
+										<td><span class="tishu" data="1">0</span>题</td>
+									</tr>
+									<tr>
+										<td>A2型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="2"></td>
+										<td><span class="tishu" data="2">0</span>题</td>
+									</tr>
+									<tr>
+										<td>A3型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="3"></td>
+										<td><span class="tishu" data="3">0</span>题</td>
+									</tr>
+									<tr>
+										<td>A4型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="4"></td>
+										<td><span class="tishu" data="4">0</span>题</td>
+									</tr>
+									<tr>
+										<td>X型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="6"></td>
+										<td><span class="tishu" data="6">0</span>题</td>
+									</tr>
+									<tr>
+										<td>B1型题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="7"></td>
+										<td><span class="tishu" data="7">0</span>题</td>
+									</tr>
+										<tr>
+										<td >简答题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="12"></td>
+										<td><span class="tishu" data="12">0</span>题</td>
+									</tr>
+									<tr>
+										<td>案例题</td>
+										<td  style="display:none"><input class="table-input" type="text" value="0" data="14"></td>
+										<td><span class="tishu" data="14">0</span>题</td>
+									</tr>
+																		</tbody>
+							</table>
+							<button class="layui-btn layui-btn-radius startTest">创建计划</button>
+
+							<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+								<legend>备注</legend>
+								此功能采用艾宾浩斯记忆训练法开发的功能，处于开发调试中，功能未完善，谨慎使用。
+							  </fieldset>
+						</div>
+					</div>
+					<div class="mnkc-rightr">
+						<div class="mnkc-ltitle">创建的计划</div>
+						<div class="caidan-list">
+							<div class="yiji jhcd">
+								{volist name="ldata" id="lv"}
+								<div class="lda">
+									{$lv["title"]}第{$lv["typeno"]}次：{$lv["creattime"]}
+									<span class="zuoti-icon" data-id="{$lv['id']}" data-typeno="{$lv['typeno']}" data-isstart="{$lv['isstart']}">开始做题</span>
+									<span class="zuoti-icon-del" data="{$lv['id']}">删除</span>
+								</div>
+							
+							{/volist}
+							</div>
+						</div>
+
+
+					</div>
+					<p class="fade-icon-zhankai"></p>
+				</div>
+			</div>
+
+
+
+		<!--遮罩-->
+		<div class="goumai-chuangkou">
+			<div class="tip-content">
+				
+			</div> 
+		</div> 		
+
+</div>
+</div>
+
+					<!--考试页面-->
+					<div class="exam-chuangkou">
+						<span class="exam-close-button">关闭</span>
+						<div class="tip-content"></div> 
+					</div>
+
+		{include file='goumai'}
+		<script>
+		var _cateid={$cateid};
+		var _myFontSize = "22px";
+		var _qxh = "0";
+		var _tsBuy = "0";
+
+		var _examLog = '';
+		var _cur = 'beiti';//控制左侧选中菜单this
+		_treeList="{:Url('zjlist',array('cateid'=>$cateid))}";
+		var _getQueTypeNums = "{:Url('getquetypenums',array('cateid'=>$cateid))}";
+		var _mnkc="{:Url('ab_mnkc',array('cateid'=>$cateid))}";
+		var _deljh="{:Url('dellianxi',array('cateid'=>$cateid))}";
+		var _gettque="{:Url('GetLXtque',array('cateid'=>$cateid))}";
+		_shouCang="{:Url('userfav',array('cateid'=>$id))}";
+		_saveNote="{:Url('usebiji',array('cateid'=>$id))}";
+		_Jiucuo="{:Url('usejiucuo',array('cateid'=>$id))}";
+		_saveYtLog ="{:Url('usercuoti',array('cateid'=>$id))}";
+		</script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+<script src="{__WAP_PATH}js/tkMn.js"></script>
+<script src="{__WAP_PATH}js/tkstart.js"></script>
+<script>
+	
+	$('.startTest').click(function(){
+		//收集数据
+		var _tmp1 = $('.layui-form-checkbox');
+		var _cateId = [];
+		$.each(_tmp1,function(){
+			if($(this).hasClass('layui-form-checked')){
+				var _val = $(this).prev().val();
+				_cateId.push(_val);
+			}
+		});
+		if(_cateId.length==0){//初始化0
+			layer.msg('选择做题数不得超过对应题型总题数！同时做题数不能同时为0！'); 
+			return false;
+		}
+		console.log(_cateId);
+		//提交数据
+		$.post(_mnkc,{'zid':_cateId},function(resp){
+			console.log(resp);
+			if(resp.code==200){
+				$(".jhcd").html(resp.msg);
+			}else{
+				layer.msg(resp.message); 
+			}
+		},'json'); 
+	});
+	//删除计划 
+	$(document).on('click','.zuoti-icon-del',function(){		
+		var jhid = $(this).attr('data');
+		//console.log(jhid);
+		var _url=_deljh;
+		var _this=this;
+		$.post(_url,{'id':jhid},function(resp){ 
+			console.log(resp);
+			if(resp.code==200){
+
+				$(_this).parent().remove();
+			}
+		},"json");
+	});
+</script>
+	</body>
+</html>

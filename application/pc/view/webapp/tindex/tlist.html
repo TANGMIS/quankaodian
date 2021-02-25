@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		{include  file="public/head"}
+		<title>题库</title>
+	</head>
+	<body>
+		<div class="layui-main">
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{include  file="ttopnav" /}
+				</div>
+			</div>
+<div class="define-content layui-clear">
+<div class="content-left">
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+{include  file="tleft"}
+</ul>
+</div>
+<div class="content-right">
+	<div class="tiku" style="display: block;">
+		<div class="top-menu sp-bbottom">
+			<div class="title">{$item.cname}</div>
+			<div class="jihuo-icon">{if $isopenc==1}已激活{else}未激活{/if}</div>
+		
+		</div>
+		<div class="kszn layui-clear">
+			<div class="left-caidan">
+				<div class="kstk-caidan">选择章节</div>
+				<div class="kstk-left">
+					{volist name="tcatelist" id="vo" key="k"}
+					<div class="caidan-list">
+						<div class="caidan-yiji" title="{$vo.cateName}">{$k}.{$vo.cateName}<span class="zhankai-arror"></span></div>
+						<ul class="{if condition='$k>1'}hide-ul{/if}">
+							{volist name="$vo.son" id="sv"}
+							<li  data="{$sv['cateId']}" title="{$sv.cateName}">{$sv.cateName}</li>
+							{/volist}
+						</ul>
+					</div>
+					{/volist}
+				</div>
+			</div>
+			<div class="kstk-right">
+				<div class="kstk-xxjd">
+					学习分支
+					
+				</div><!-----cccc----->
+				<div class="kstk-mulu">
+		
+				</div>
+			</div>
+		</div>
+		<div class="kstk-dati">
+			<div class="ksdt-timu">
+			</div>
+		</div>
+	<p class="fade-icon-zhankai"></p>
+</div>
+
+</div>
+</div>
+					<!--考试页面-->
+					<div class="exam-chuangkou">
+						<span class="exam-close-button">关闭</span>
+						<div class="tip-content"></div> 
+					</div>
+		<!--遮罩-->
+		{include  file="goumai"}
+		<script>
+		var _cateId={$id};
+		var _myFontSize = "22px";
+		var _qxh = "0";
+		var _cur = 'tiku';//控制左侧选中菜单this
+		var _zid={$zid};
+		_treeList="{:Url('treeList',array('cateid'=>$id))}";
+		_tkExamInfo="{:Url('texamtemplate',array('cateid'=>$id))}";
+		_shouCang="{:Url('userfav',array('cateid'=>$id))}";
+		_saveNote="{:Url('usebiji',array('cateid'=>$id))}";
+		_Jiucuo="{:Url('usejiucuo',array('cateid'=>$id))}";
+		_saveYtLog ="{:Url('usercuoti',array('cateid'=>$id))}";
+
+treeList(_zid);
+
+function treeList(zid){
+	$('.kstk-mulu').html('');
+
+	$.post(_treeList,{'zid':zid},function(resp){
+		console.log(resp);
+		if(resp.code==200){
+			$('.kstk-mulu').html(resp.data);
+		}
+	},'json');
+}
+$('.caidan-list li').click(function(){
+	var cateid = $(this).attr('data'); 
+	treeList(cateid);
+}); 
+		</script>
+<script src="{__WAP_PATH}layui/layui.js" charset="UTF-8"></script>
+<script src="{__WAP_PATH}js/comm.js"></script>
+<script src="{__WAP_PATH}js/commcp.js"></script>
+<script src="{__WAP_PATH}js/tkExam.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,80 @@
+{extend name="ke/main"}
+{block name="content"}
+<script type="text/javascript" src="{__WAP_PATH}js/jquery-1.7.js"></script>
+<script type="text/javascript" src="{__WAP_PATH}js/jquery.qrcode.min.js"></script>
+    <div class="layui-breadcrumb breadcrumb">
+        <a href="/">首页</a>
+        <a><cite>支付订单</cite></a>
+    </div>
+    <div class="payment wrap">
+        <div class="header">
+            订单名称：<span>{$special.title}</span>
+            订单编号：<span>{$orderId}</span>
+            支付金额：<span class="amount">￥{$order.total_price}</span>
+        </div>
+        <div class="channel">
+
+                <a class="alipay btn-pay" data-type='alipay' href="javascript:" data-channel="alipay"><img src="{__WAP_PATH}images/alipay.png"></a>
+                <a class="wxpay btn-pay" data-type='wxpay' href="javascript:" data-channel="wxpay"><img src="{__WAP_PATH}images/wxpay.png"></a>
+        </div>
+        <div class="footer">
+            <span class="tips">友情提示：请在12小时内完成支付，有问题请联系客服</span>
+        </div>
+    </div>
+
+    <div id="alipay-qrcode" class="layui-hide"></div>
+    <div id="wxpay-qrcode" class="layui-hide"></div>
+<script>
+var click=0;
+var orderId='{$orderId}';
+layui.use(['jquery', 'layer'], function () {
+var $ = layui.jquery;
+var layer = layui.layer;
+
+$('.btn-pay').on('click', function () {
+    var paytype=$(this).attr('data-type');
+    var qrTitle = paytype === 'alipay' ? '支付宝扫码支付' : '微信扫码支付';
+    var createUrl="{:Url('gopay',array('orderId'=>$orderId))}"+"?payType="+paytype;
+    var statusUrl="{:Url('paystatus',array('orderId'=>$orderId))}"+"?payType="+paytype;
+    var forwardUrl="{:Url('course',array('special_id'=>$special.id))}";
+    if (click==0) {
+        click=1;
+        var postData = {'orderId':orderId};
+        $.post(createUrl, postData, function (res) {
+           console.log( res.data.code_url)
+            qrHtml = '<div class="qrcode"></div>';
+            showQrLayer(qrTitle, qrHtml);
+            jQuery('.qrcode').qrcode({width: 158, height: 158, text: res.data.code_url});
+            var interval = setInterval(function () {
+                var queryData = {'orderId':orderId};
+                $.get(statusUrl, queryData, function (res) {
+                    console.log(res);
+                    if(res.msg=='ok'){
+                        clearInterval(interval);
+                        $('#pay-layer').html('<div class="success-tips">支付成功</div>');
+                        setTimeout(function () {
+                            window.location.href = forwardUrl;
+                        }, 5000);
+                    }
+                },'json');
+            }, 5000);
+        },'json');
+    } else {
+        showQrLayer(qrTitle, qrHtml);
+    }
+});
+
+function showQrLayer(title, content) {
+    layer.open({
+        type: 1,
+        id: 'pay-layer',
+        title: title,
+        content: content,
+        area: ['640px', '320px']
+    })
+}
+
+});
+
+</script>
+{/block}

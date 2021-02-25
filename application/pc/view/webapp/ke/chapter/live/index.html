@@ -1,0 +1,74 @@
+{extend name="ke/main"}
+{block name="content"}
+    <div class="breadcrumb">
+        <span class="layui-breadcrumb">
+            <a href="{{ course_url }}"><i class="layui-icon layui-icon-return"></i> 返回课程</a>
+            <a><cite>{{ chapter.title }}</cite></a>
+        </span>
+        <span class="share">
+          
+            <a href="javascript:" title="在线人数"><i class="layui-icon layui-icon-user"></i><em>0</em></a>
+            <a href="javascript:" title="分享到微信" data-url=""><i class="layui-icon layui-icon-login-wechat icon-wechat"></i></a>
+            <a href="javascript:" title="分享到QQ空间"><i class="layui-icon layui-icon-login-qq icon-qq"></i></a>
+            <a href="javascript:" title="分享到微博"><i class="layui-icon layui-icon-login-weibo icon-weibo"></i></a>
+        </span>
+    </div>
+
+    <div class="layout-main">
+        <div class="layout-content">
+            <div class="player-wrap wrap">
+                <div id="player"></div>
+            </div>
+        </div>
+        <div class="layout-sidebar">
+            <div class="layui-card chat-wrap">
+                <div class="layui-card-header">直播讨论</div>
+                <div class="layui-card-body">
+                    <div class="chat-msg-list" id="chat-msg-list" data-url="{{ live_chats_url }}"></div>
+                    <form class="layui-form chat-msg-form" method="post" action="{{ send_msg_url }}">
+                        {% if auth_user.id > 0 %}
+                            <input class="layui-input" type="text" name="content" maxlength="50" placeholder="快来一起互动吧" lay-verType="tips" lay-verify="required">
+                        {% else %}
+                            <input class="layui-input" type="text" placeholder="登录后才可以发言哦" readonly="readonly">
+                        {% endif %}
+                        <button class="layui-hide" type="submit" lay-submit="true" lay-filter="chat">发送</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-hide">
+        <input type="hidden" name="share.title" value="{$taskInfo.title}">
+        <input type="hidden" name="share.pic" value="{$taskInfo.image}">
+        <input type="hidden" name="share.url" value="{:Url('course')}">
+        <input type="hidden" name="share.qrcode" value="">
+    </div>
+    <script>
+        var myShare = {
+        title: $('input[name="share.title"]').val(),
+        pic: $('input[name="share.pic"]').val(),
+        url: $('input[name="share.url"]').val(),
+        qrcode: $('input[name="share.qrcode"]').val()
+    };
+
+    $('.icon-wechat').on('click', function () {
+        helper.wechatShare(myShare.qrcode);
+        $(".qrcode").html('');
+        jQuery('.qrcode').qrcode({ width: 158, height: 158, text: myShare.url });
+    });
+
+    $('.icon-qq').on('click', function () {
+        var title = '推荐一门好课：' + myShare.title + '，快来和我一起学习吧！';
+        helper.qqShare(title, myShare.url, myShare.pic);
+    });
+
+    $('.icon-weibo').on('click', function () {
+        var title = '推荐一门好课：' + myShare.title + '，快来和我一起学习吧！';
+        helper.weiboShare(title, myShare.url, myShare.pic);
+    });
+
+</script>
+{/block}
+
+

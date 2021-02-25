@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="{MODULE_URL}template/webapp/js/jquery-1.7.js"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.6/css/layui.css" media="all">
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/comtop.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/yt.css"/>
+		<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/webapp/css/tk.css"/>
+		<title>题库首页</title>
+	</head>
+	<body>
+		<div class="layui-main">
+
+		<div class="define-top">
+				<div class="left-logo"></div>
+				<div class="menu layui-clear">
+					{php include $this->template('ttopnav')}
+				</div>
+				<div class="top-caidan">
+					<span class="caidan-1"></span>					<span class="caidan-2" style="display: none;"></span> 
+										<div class="pifu">
+						<ul>
+							<li class="pifu1"></li>
+							<li class="pifu2"></li>
+							<li class="pifu3"></li>
+							<li class="pifu4"></li>
+						</ul>
+						<ul>
+							<li class="pifu5"></li>
+							<li class="pifu6"></li>
+							<li class="pifu7"></li>
+							<li class="pifu8"></li>
+						</ul>
+					</div>
+			    </div>
+			</div>
+<div class="define-content layui-clear">
+				<div class="content-left">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						{php include $this->template('tleft')}
+</ul>
+<div class="fade-icon-shousuo"></div>				</div>
+				<div class="content-right">
+					<div class="cuoti" style="display: block;">
+					
+						<div class="liebiao-detail" style="display: block;">
+							<div class="top-menu">
+								<div class="title set-title">{php echo $this->PoolData["cname"]}</div>
+								<span class="icon-return">返回上一页</span>
+							</div>
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<div class="layui-elem-quote">
+									<p>关于押题</p>
+									<br>
+									<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;押纲点题试卷由专业医考专家团队根据本年度考试大纲或目标考点，参考历年考试真题严选精编而成，与真实考卷考点较为吻合，与真实考卷题型非常相似。押纲点题试卷的做题过程全真模仿了国家专业人机对话考试环境，学员通过对押纲点题试卷的反复练习，能持续积累考试经验，掌握考试重点，习惯考场环境，为有效通过相关考试奠定扎实基础。</p>
+								  </div>
+<div class="layui-tab-content">
+<div class="layui-tab-item top-tip layui-show">
+	<div class="layui-elem-quote">
+		<p>题库试题</p>
+	</div>
+			<div class="shiti">
+				{loop $tdata $k $v}
+				<div class="yt-list">
+					<span  style="font-weight: bold;">{$v["queTypeName"]}：</span>
+					<span>{$v["memo"]}</span>
+					<span class="show-kaoshi rukou-icon show-exam-xitong" data="{$v['queTypeId']}" data-ty="tk">开始练习</span>
+				</div>
+				{/loop}
+				<div class="layui-elem-quote">
+					<p>押题圈题</p>
+				</div>
+	
+					{loop $ytqtdata $k $v}
+					<div class="yt-list">
+						<span  style="font-weight: bold;">{$v["queTypeName"]}：</span>
+						<span>{$v["memo"]}</span>
+						<span class="show-kaoshi rukou-icon show-exam-xitong" data="{$v['queTypeId']}" data-ty="yt">开始练习</span>
+					</div>
+					{/loop}
+
+</div>
+</div>
+							</div> 
+						</div>
+		
+					</div>
+
+					<div class="kstk-dati">
+						<div class="ksdt-timu">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-phone">客服QQ：944409477（9:00-22:00）</div>		</div>
+			<script>
+				var _cateid={php echo $this->cateid};
+				var _cur = 'tixinglianxi';//控制左侧选中菜单this
+				_tkExamInfo="{php echo $this->createMobileUrl('txtque',array('cateid'=>$this->cateid))}";
+				</script>
+		<!--遮罩-->
+		{php include $this->template('goumai')}
+
+<script src="{MODULE_URL}template/webapp/js/comm.js"></script>
+<script src="{MODULE_URL}template/webapp/js/commcp.js"></script>
+<script src="{MODULE_URL}template/webapp/layui/layui.js" charset="UTF-8"></script>
+<script src="{MODULE_URL}template/webapp/js/typExam.js"></script>
+
+	</body>
+</html>

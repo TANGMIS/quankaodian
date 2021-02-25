@@ -1,0 +1,89 @@
+
+<div class="sidebar wrap">
+    <button class="layui-btn layui-btn-fluid layui-bg-red btn-buy toUrl" data="{:Url('pay',array('special_id'=>$special_id))}">立即购买</button>
+   
+</div>
+<div class="sidebar wrap">
+    <button class="layui-btn layui-btn-fluid layui-bg-green btn-buy jihuo-icon" >开通会员</button>
+   
+</div>
+<link rel="stylesheet" type="text/css" href="{__WAP_PATH}css/kegoumai.css"/>
+<script>
+
+layui.use(['jquery', 'layer' ,'element','form'], function(){ 
+    var $ = layui.$ //重点处
+    ,layer = layui.layer
+    ,element = layui.element
+    ,form = layui.form;
+    
+    //购买/激活窗口
+    $(".jihuo-icon").click(function(){
+    if(_jh==1)
+    {
+        layer.msg('已经激活过了~不用再激活了',{time:1000});
+        return;
+    }
+    $(".goumai-chuangkou").fadeIn();
+})
+$(document).on('click','.close',function(){
+    $(".goumai-chuangkou").fadeOut();
+    $(".pay-chuangkou").fadeOut();
+})
+
+$(document).on('click','.left-goumai',function(){
+   // $(".step1").fadeOut();
+   var _url = _selectPro;
+   $.post(_url,'',function(resp){
+       console.log(resp)
+       if(resp.code==200){
+           var html='';
+           $.each(resp.data,function(i,item){
+                html=html+'<div class="kemutitle-pro">';
+                html=html+'<p class="kemu-biaozhi-pro">'+item.title+'会员</p>';
+                html=html+'<div class="kumu-buy-pro">';
+                html=html+'<span class="danjia-pro">￥'+item.original_price+'</span>';
+                html=html+'<span class="liji-goumai-pro"  data-p="'+item.original_price+'" data-id="'+item.id+'">立即购买</span>';
+                html=html+'</div>';
+                html=html+'<hr>';
+                html=html+'</div>';
+           })
+
+           $('.selectpay').html(html);
+       }
+   },'json');
+    //$(".goumai-chuangkou").fadeOut();
+    //$(".pay-chuangkou").fadeIn();
+});
+
+$(document).on('click','.liji-goumai-pro',function(){ 
+    var _this=this;
+    $.post(_userlogin,'',function(resp){
+        console.log(resp)
+        if(resp.code==200){
+            console.log($(_this).attr('data-id'))
+            $("#itemid").val($(_this).attr('data-id'));
+            $("#price").val($(_this).attr('data-p'));
+            $(".goumai-chuangkou").fadeOut();
+            $(".pay-chuangkou").fadeIn();
+        }
+    },'json');
+
+    //window.location.href=_zhifubao;
+}); 
+
+$(document).on('click','.toPay',function(){ 
+   var payType=$(this).attr('data-type');
+   var special_id=$("#itemid").val();
+
+    window.location.href=_create_order+"?payType="+payType+"&special_id="+special_id;
+   // window.location.href=_create_order;
+
+});
+$(document).on('click','.toUrl',function(){
+    var _url = $(this).attr('data');
+    window.location.href = _url;
+});
+});
+
+
+</script>

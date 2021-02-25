@@ -1,0 +1,40 @@
+  
+    <div class="sidebar">
+        <div class="layui-card">
+            <div class="layui-card-header">授课教师</div>
+            <div class="layui-card-body">
+               {if condition="!empty($teacher) eq true"}
+                    <div class="sidebar-teacher-card clearfix">
+                        <div class="avatar">
+                            <img src="{$teacher.lecturer_head}" alt="{$teacher.lecturer_name}">
+                        </div>
+                        <div class="info">
+                            <div class="name layui-elip">
+                                <a href="#" >{$teacher.lecturer_name}</a><div class="attr">{$teacher.study }人学习 | {$teacher.curriculum}课时</div>
+                            </div>
+                            {volist name="teacher.label" id="per"}
+                            <span class="title layui-elip"  style="border:1px solid #ccc;padding:5px;">{$per}</span>
+                            {/volist}
+                        </div>
+                    </div>
+            {/if}
+                    </div>
+            </div>
+        </div>
+      
+        <div class="sidebar">
+            <div class="layui-card">
+                <div class="layui-card-header">标签</div>
+                <div class="layui-card-body">
+                    
+                        <div class="sidebar-teacher-card clearfix">
+                    
+                                {volist name="item.label" id="la"}
+                                <span class="title layui-elip" style="border:1px solid #ccc;padding:5px;">{$la}</span>
+                                {/volist}
+                            </div>
+                        </div>
+    
+                        </div>
+                </div>
+            </div>
